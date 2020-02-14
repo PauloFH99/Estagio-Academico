@@ -1,0 +1,92 @@
+.Button{
+    -fx-background-color:  #8395a7;
+    -fx-font: Arial;
+    -fx-font-weight: normal;
+    -fx-text-fill:  white;
+    -fx-font-size: 22;
+}
+.Button:hover{
+    -fx-background-color:  #576574;
+    -fx-font: Arial;
+    -fx-font-weight: normal;
+    -fx-text-fill: white;
+    -fx-font-size: 22;
+}
+.fundo{
+    -fx-background-color:  #FFFFFF;  
+}
+.fundoSuperior{
+    -fx-background-color:  #364150;  
+}
+
+.conta {
+    margin: 0 -40px -30px;
+    padding: 15px 0 17px;
+    text-align: center;
+    -fx-background-color:  #6c7a8d; 
+}
+.logar {
+    margin: 0 -40px -30px;
+    padding: 15px 0 17px;
+    text-align: center;
+    -fx-font-weight: normal;
+    -fx-background-color:  #32c5d2; 
+    -fx-text-fill: #FFFFFF;
+}
+.logar:hover{
+    -fx-background-color:  #26a0ab;
+    -fx-font: Arial;
+    -fx-font-weight: normal;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+.sair {
+    margin: 0 -40px -30px;
+    padding: 15px 0 17px;
+    text-align: center;
+    -fx-font-weight: normal;
+    -fx-background-color:  #e44043; 
+    -fx-text-fill: #FFFFFF;
+}
+.sair:hover{
+    -fx-background-color:  #db4a37;
+    -fx-font: Arial;
+    -fx-font-weight: normal;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+
+}
+.TextFieldLogar{
+    -fx-background-color: #dde3ec;
+    -fx-text-fill: #8290a3;
+    -fx-font-weight: normal;
+    -fx-border-color: #dde3ec;
+}
+
+.tabCor{
+    -fx-background-color: #eef1f5;
+}
+.tab-header-background{
+    -fx-background-color: #eef1f5;
+}
+.settings-tab:selected{
+    -fx-background-color: #212d41;
+}
+
+.tab-label{
+    -fx-text-fill: #32c5d2;
+    -fx-font-size: 15pt; 
+}
+
+
+.menubar{
+    -fx-font-size: 14;
+    -fx-base : #343e43;
+    -fx-background-color: #343e43;
+     -fx-text-fill: #eef1f5;
+}
+.conteudomenubar {
+    -fx-background-color:  derive(#343e43, 100%);
+    -fx-font-size: 14;
+    -fx-min-width: 150px;
+}
