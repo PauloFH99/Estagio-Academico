@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="tabCor" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
+<AnchorPane id="AnchorPane" styleClass="tabCor" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
    <children>
-      <BorderPane layoutY="-1.0" prefHeight="394.0" prefWidth="592.0">
+      <BorderPane layoutY="-1.0" maxWidth="990.0" prefHeight="1440.0">
          <top>
-            <Pane prefHeight="34.0" prefWidth="592.0" styleClass="menubar" BorderPane.alignment="CENTER">
+            <Pane prefHeight="36.0" prefWidth="1440.0" styleClass="menubar" BorderPane.alignment="CENTER">
                <children>
-                  <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="35.0" prefWidth="600.0" styleClass="menubar" stylesheets="@css/Styles.css">
+                  <MenuBar layoutX="-1.0" layoutY="1.0" styleClass="menubar" stylesheets="@css/Styles.css">
                     <menus>
                       <Menu mnemonicParsing="false" text="Cadastro">
                         <items>
@@ -38,7 +39,7 @@
             </Pane>
          </top>
          <center>
-            <JFXTabPane prefHeight="360.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+            <JFXTabPane prefHeight="990.0" prefWidth="1440.0" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab text="Página Inicial">
                     <content>
