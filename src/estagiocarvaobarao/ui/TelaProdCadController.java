@@ -5,6 +5,8 @@
  */
 package estagiocarvaobarao.ui;
 
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import estagiocarvaobarao.dal.DALCategoria;
 import estagiocarvaobarao.dal.DALProduto;
 import estagiocarvaobarao.entidade.Categoria;
@@ -26,13 +28,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -53,23 +58,19 @@ public class TelaProdCadController implements Initializable {
     @FXML
     private Button btcancelar;
     @FXML
-    private AnchorPane pndados;
-    @FXML
+    private Pane pndados;
     private TextField txcode;
     @FXML
     private TextField txdescricao;
-    @FXML
     private TextField txest_min;
-    @FXML
     private TextField txest_max;
-    @FXML
     private TextField txestoque;
     @FXML
     private ComboBox<Categoria> cbCat;
     @FXML
     private TextField txpreco;
     @FXML
-    private VBox pnpesquisa;
+    private Pane pnpesquisa;
     @FXML
     private TextField txpesquisar;
     @FXML
@@ -87,6 +88,22 @@ public class TelaProdCadController implements Initializable {
 
     @FXML
     private CheckBox chkAtivo;
+    @FXML
+    private ToggleGroup Pesquisa;
+    @FXML
+    private JFXTextField txcod;
+    @FXML
+    private JFXTextField txmin;
+    @FXML
+    private JFXTextField txmax;
+    @FXML
+    private JFXTextField txfisi;
+    @FXML
+    private Pane pnbtn;
+    @FXML
+    private JFXRadioButton rbdescricao;
+    @FXML
+    private JFXRadioButton rbcategoria;
 
     /**
      * Initializes the controller class.
@@ -94,9 +111,9 @@ public class TelaProdCadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MaskFieldUtil.monetaryField(txpreco);
-        MaskFieldUtil.numericField(txest_min);
-        MaskFieldUtil.numericField(txest_max);
-        MaskFieldUtil.numericField(txestoque);
+        MaskFieldUtil.numericField(txmin);
+        MaskFieldUtil.numericField(txmax);
+        MaskFieldUtil.numericField(txfisi);
 
         colcod.setCellValueFactory(new PropertyValueFactory("codigo"));
         coldescricao.setCellValueFactory(new PropertyValueFactory("descricao"));
@@ -171,16 +188,20 @@ public class TelaProdCadController implements Initializable {
 
     @FXML
     private void clkPesquisar(ActionEvent event) {
-        int tam = -1;
-        if (txpesquisar.getText().matches(".*\\d.*")) {
-            carregaTabelaInt(Double.parseDouble(txpesquisar.getText().toUpperCase().replace(",", ".")));
-        } else {
-            tam = carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-            if (tam == 0) {
-                carregaTabelaCategoria(txpesquisar.getText());
+
+        if (!txpesquisar.getText().isEmpty()) {
+            if (rbdescricao.isSelected()) {
+                carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
+            } else {
+                if (rbcategoria.isSelected()) {
+                    carregaTabelaCategoria(txpesquisar.getText());
+                }
             }
         }
-
+        else
+        {
+             carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
+        }
     }
 
     @FXML
@@ -192,12 +213,12 @@ public class TelaProdCadController implements Initializable {
     private void clkalterar(ActionEvent event) {
         estadoEdicao();
         Produto p = (Produto) tabela.getSelectionModel().getSelectedItem();
-        txcode.setText("" + p.getCodigo());
-        txest_min.setText("" + p.getEst_min());
-        txest_max.setText("" + p.getEst_max());
+        txcod.setText("" + p.getCodigo());
+        txmin.setText("" + p.getEst_min());
+        txmax.setText("" + p.getEst_max());
         txdescricao.setText(p.getDescricao());
         txpreco.setText("" + p.getPreco());
-        txestoque.setText("" + p.getEstoque());
+        txfisi.setText("" + p.getEstoque());
         chkAtivo.setSelected(p.isAtivo());
         cbCat.getSelectionModel().select(0);
         cbCat.getSelectionModel().select(p.getCategoria());
@@ -234,58 +255,15 @@ public class TelaProdCadController implements Initializable {
         int cod, erro = 0;
         Messages msg = new Messages();
         try {
-            cod = Integer.parseInt(txcode.getText());
+            cod = Integer.parseInt(txcod.getText());
         } catch (Exception e) {
             cod = 0;
         }
 
-        if (CampoVazio(txest_min.getText()) || CampoVazio(txest_max.getText()) || CampoVazio(txestoque.getText())) {
-            msg.Error("Informação inválida!", "O campo estoque mínimo/estoque máximo ou estoque físico estão em branco!");
-
-            txest_min.requestFocus();
-            exit(1);
-            erro = 1;
-        }
-        if ((retornaValor(txest_min.getText()) < 0) || (retornaValor(txest_max.getText()) < 0) || (retornaValor(txestoque.getText()) < 0)) {
-            msg.Error("Informação inválida!", "O campo estoque mínimo/máximo ou estoque físico não podem ser negativo!");
-
-            txest_min.requestFocus();
-            exit(1);
-            erro = 1;
-        }
-        if (retornaValor(txest_max.getText()) <= retornaValor(txest_min.getText())) {
-            msg.Error("Informação inválida!", "O estoque máximo tem que ser maior que o estoque mínimo!");
-
-            txest_max.requestFocus();
-            exit(1);
-            erro = 1;
-        }
-        if (retornaValor(txest_min.getText()) >= retornaValor(txest_max.getText())) {
-            msg.Error("Informação inválida!", "O estoque mínimo tem que ser menor que o estoque máximo!");
-
-            txest_min.requestFocus();
-            exit(1);
-            erro = 1;
-        }
-
-        if (retornaValor(txestoque.getText()) > retornaValor(txest_max.getText())) {
-            msg.Error("Informação inválida!", "O estoque físico tem que ser menor que o estoque máximo!");
-
-            txestoque.requestFocus();
-            exit(1);
-            erro = 1;
-        }
         if (CampoVazio(txdescricao.getText())) {
             msg.Error("Informação inválida!", "O campo descrição esta em branco!");
 
             txdescricao.requestFocus();
-            exit(1);
-            erro = 1;
-        }
-        if (CampoVazio(txpreco.getText())) {
-            msg.Error("Informação inválida!", "O campo preço esta em branco!");
-
-            txpreco.requestFocus();
             exit(1);
             erro = 1;
         }
@@ -297,8 +275,56 @@ public class TelaProdCadController implements Initializable {
             erro = 1;
         }
 
+        if (CampoVazio(txmin.getText()) || CampoVazio(txmax.getText()) || CampoVazio(txfisi.getText())) {
+            msg.Error("Informação inválida!", "O campo estoque mínimo/estoque máximo ou estoque físico estão em branco!");
+
+            txmin.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+        if ((retornaValor(txmin.getText()) < 0) || (retornaValor(txmax.getText()) < 0) || (retornaValor(txfisi.getText()) < 0)) {
+            msg.Error("Informação inválida!", "O campo estoque mínimo/máximo ou estoque físico não podem ser negativo!");
+
+            txmin.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+        if (retornaValor(txmin.getText()) >= retornaValor(txmax.getText())) {
+            msg.Error("Informação inválida!", "O estoque mínimo tem que ser menor que o estoque máximo!");
+
+            txmin.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+        if (retornaValor(txmax.getText()) <= retornaValor(txmin.getText())) {
+            msg.Error("Informação inválida!", "O estoque máximo tem que ser maior que o estoque mínimo!");
+
+            txmax.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+
+        if (retornaValor(txfisi.getText()) > retornaValor(txmax.getText())) {
+            msg.Error("Informação inválida!", "O estoque físico tem que ser menor que o estoque máximo!");
+
+            txfisi.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+
+        if (CampoVazio(txpreco.getText())) {
+            msg.Error("Informação inválida!", "O campo preço esta em branco!");
+
+            txpreco.requestFocus();
+            exit(1);
+            erro = 1;
+        }
+
         if (erro == 0) {
-            Produto p = new Produto(cod, Integer.parseInt(txest_min.getText()), Integer.parseInt(txest_max.getText()), txdescricao.getText(), Double.parseDouble(txpreco.getText().replace(",", ".")), Integer.parseInt(txestoque.getText()), chkAtivo.isSelected(), cbCat.getSelectionModel().getSelectedItem());
+            Produto p = new Produto(cod, Integer.parseInt(txmin.getText()), Integer.parseInt(txmax.getText()),
+                    txdescricao.getText(), Double.parseDouble(txpreco.getText().replace(",", ".")),
+                    Integer.parseInt(txfisi.getText()), chkAtivo.isSelected(),
+                    cbCat.getSelectionModel().getSelectedItem());
             DALProduto dal = new DALProduto();
 
             if (p.getCodigo() == 0) {
@@ -337,5 +363,7 @@ public class TelaProdCadController implements Initializable {
     private void exit(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 }

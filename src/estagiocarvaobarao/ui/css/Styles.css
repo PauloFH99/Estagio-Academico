@@ -1,3 +1,16 @@
+* {
+    -fx-primary : #2A2E37;
+    -fx-secondary : #FFFF8D;
+    -fx-primarytext : #B2B2B2;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+    -fx-color-1:#1976D2;
+}
+
+
+
+
+
 .Button{
     -fx-background-color:  #8395a7;
     -fx-font: Arial;
@@ -5,6 +18,9 @@
     -fx-text-fill:  white;
     -fx-font-size: 22;
 }
+
+
+    
 .Button:hover{
     -fx-background-color:  #576574;
     -fx-font: Arial;
@@ -89,4 +105,14 @@
     -fx-background-color:  derive(#343e43, 100%);
     -fx-font-size: 14;
     -fx-min-width: 150px;
+}
+
+
+.table-view{
+    -fx-background-color: derive(-fx-primary, 10%);
+    -fx-font-size: 16px; 
+    -fx-border-color: derive(-fx-secondary, -60%);
+}
+.table-view:focused{
+    -fx-background-color: derive(-fx-primary, 20%);
 }

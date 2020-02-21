@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -9,47 +14,71 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaProdCadController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="530.0" prefWidth="600.0">
          <top>
-            <Pane prefHeight="59.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pnbtn" prefHeight="59.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton layoutX="26.0" layoutY="12.0" prefHeight="30.0" prefWidth="94.0" ripplerFill="#3e24d3" text="Novo" />
-                  <JFXButton layoutX="147.0" layoutY="12.0" prefHeight="30.0" prefWidth="94.0" text="Alterar" />
-                  <JFXButton layoutX="278.0" layoutY="12.0" prefHeight="30.0" prefWidth="94.0" text="Apagar" />
-                  <JFXButton layoutX="386.0" layoutY="12.0" prefHeight="30.0" prefWidth="91.0" ripplerFill="#26d157" text="Confirmar" />
-                  <JFXButton layoutX="482.0" layoutY="13.0" prefHeight="30.0" prefWidth="94.0" ripplerFill="#d14326" text="Cancelar" />
+                  <JFXButton fx:id="btnovo" layoutX="26.0" layoutY="12.0" onAction="#clknovo" prefHeight="30.0" prefWidth="94.0" ripplerFill="#3e24d3" text="Novo" />
+                  <JFXButton fx:id="btalterar" layoutX="147.0" layoutY="12.0" onAction="#clkalterar" prefHeight="30.0" prefWidth="94.0" text="Alterar" />
+                  <JFXButton fx:id="btapagar" layoutX="278.0" layoutY="12.0" onAction="#clkapagar" prefHeight="30.0" prefWidth="94.0" text="Apagar" />
+                  <JFXButton fx:id="btconfirmar" layoutX="386.0" layoutY="12.0" onAction="#clkconfirmar" prefHeight="30.0" prefWidth="91.0" ripplerFill="#26d157" text="Confirmar" />
+                  <JFXButton fx:id="btcancelar" layoutX="482.0" layoutY="13.0" onAction="#clkcancelar" prefHeight="30.0" prefWidth="94.0" ripplerFill="#d14326" text="Cancelar" />
                </children>
             </Pane>
          </top>
          <center>
-            <Pane prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pndados" prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
-                  <JFXTextField labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="323.0" promptText="Descrição" />
-                  <JFXTextField labelFloat="true" layoutX="79.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Minimo" />
-                  <JFXTextField labelFloat="true" layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="157.0" promptText="Estoque Maximo" />
-                  <JFXTextField labelFloat="true" layoutX="444.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Físico" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXTextField fx:id="txdescricao" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="323.0" promptText="Descrição *" />
+                  <JFXComboBox fx:id="cbCat" layoutX="444.0" layoutY="89.0" prefHeight="25.0" prefWidth="135.0" />
+                  <JFXTextField fx:id="txmin" labelFloat="true" layoutX="79.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Minimo *" />
+                  <JFXTextField fx:id="txmax" labelFloat="true" layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="157.0" promptText="Estoque Maximo *" />
+                  <JFXTextField fx:id="txfisi" labelFloat="true" layoutX="444.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Físico *" />
+                  <JFXTextField fx:id="txpreco" labelFloat="true" layoutX="79.0" layoutY="190.0" prefHeight="25.0" prefWidth="135.0" promptText="Preço *" />
+                  <JFXCheckBox fx:id="chkAtivo" layoutX="266.0" layoutY="203.0" selected="true" text="Ativo" />
                </children>
             </Pane>
          </center>
          <bottom>
-            <VBox prefHeight="88.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="33.0" prefWidth="600.0">
+                  <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
-                        <JFXTextField labelFloat="true" prefHeight="25.0" prefWidth="442.0" promptText="Informe o nome do produto ou categoria..." />
-                        <JFXButton prefHeight="25.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </JFXButton>
+                        <HBox prefHeight="59.0" prefWidth="600.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="rbdescricao" layoutX="14.0" selected="true" text="Descrição">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Pesquisa" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="rbcategoria" layoutX="14.0" layoutY="24.0" text="Categoria" toggleGroup="$Pesquisa" />
+                                 </children>
+                              </Pane>
+                              <JFXTextField fx:id="txpesquisar" labelFloat="true" prefHeight="25.0" prefWidth="442.0" promptText="Informe a descrição do produto ou categoria..." />
+                              <JFXButton fx:id="btpesquisar" onAction="#clkPesquisar" prefHeight="25.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tabela" onMouseClicked="#evtTabela" prefHeight="171.0" prefWidth="600.0">
+                           <columns>
+                              <TableColumn fx:id="colcod" prefWidth="75.0" text="Código" />
+                              <TableColumn fx:id="coldescricao" prefWidth="137.0" text="Descrição" />
+                              <TableColumn fx:id="colpreco" prefWidth="90.0" text="Preço" />
+                              <TableColumn fx:id="colcat" prefWidth="111.0" text="Categoria" />
+                           </columns>
+                        </TableView>
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+            </Pane>
          </bottom>
       </BorderPane>
    </children>
