@@ -16,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -35,6 +38,11 @@ public class TelaInicialController implements Initializable {
     public static void setFunc(Funcionario func) {
         TelaInicialController.func = func;
     }
+    @FXML
+    private HBox menubar;
+    boolean flag = true;
+    @FXML
+    private BorderPane tela;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,6 +63,18 @@ public class TelaInicialController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void abrir_menulateral(ActionEvent event) throws IOException {
+        if (flag == true) {
+            Parent sidebar = FXMLLoader.load(getClass().getResource("MenuLateral.fxml"));
+            tela.setLeft(sidebar);
+            flag = false;
+        } else {
+            tela.setLeft(null);
+            flag = true;
         }
     }
 

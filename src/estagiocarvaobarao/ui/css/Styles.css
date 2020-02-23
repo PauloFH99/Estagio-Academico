@@ -97,12 +97,13 @@
 
 .menubar{
     -fx-font-size: 14;
-    -fx-base : #343e43;
+    -fx-base : rgb(58,69,88);
     -fx-background-color: #343e43;
      -fx-text-fill: #eef1f5;
 }
+
 .conteudomenubar {
-    -fx-background-color:  derive(#343e43, 100%);
+    -fx-background-color:  #0099ff;
     -fx-font-size: 14;
     -fx-min-width: 150px;
 }

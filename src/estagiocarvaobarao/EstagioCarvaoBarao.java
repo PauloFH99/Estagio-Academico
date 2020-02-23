@@ -28,8 +28,8 @@ public class EstagioCarvaoBarao extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("ui/TelaAutenticacao.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("ui/TelaProdCad.fxml"));
-        
+        //Parent root = FXMLLoader.load(getClass().getResource("ui/TelaProdCad.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ui/TelaInicial.fxml"));
         Scene scene = new Scene(root);
         
         stage.setScene(scene);

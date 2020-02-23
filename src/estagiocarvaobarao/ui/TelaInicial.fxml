@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,13 +18,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" styleClass="tabCor" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
+<AnchorPane id="AnchorPane" styleClass="tabCor" stylesheets="@css/stylehseet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
    <children>
-      <BorderPane layoutY="-1.0" maxWidth="990.0" prefHeight="1440.0">
+      <BorderPane fx:id="tela" layoutY="-1.0" maxWidth="990.0" prefHeight="1440.0">
          <top>
             <Pane prefHeight="36.0" prefWidth="1440.0" styleClass="menubar" BorderPane.alignment="CENTER">
                <children>
-                  <MenuBar layoutX="-1.0" layoutY="1.0" styleClass="menubar" stylesheets="@css/Styles.css">
+                  <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="50.0" prefWidth="1440.0" styleClass="menubar" stylesheets="@css/Styles.css">
                     <menus>
                       <Menu mnemonicParsing="false" text="Cadastro">
                         <items>
@@ -39,24 +48,33 @@
             </Pane>
          </top>
          <center>
-            <JFXTabPane prefHeight="990.0" prefWidth="1440.0" BorderPane.alignment="CENTER">
-               <tabs>
-                  <Tab text="Página Inicial">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox prefHeight="1055.0" prefWidth="740.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="72.0" prefWidth="740.0">
+                     <children>
+                        <HBox fx:id="menubar" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="1440.0" style="-fx-background-color: #fff; -fx-border-color: #cccccc; -fx-border-width: 0px 0px 1px 0px;" stylesheets="@../../../../../../Downloads/Flat%20Dashboard%202/Flat%20Dashboard/src/app/css/stylehseet.css">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="571.0" />
+                              <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#abrir_menulateral" prefHeight="50.0" prefWidth="50.0" ripplerFill="WHITE" styleClass="menu-bar-btns">
+                                 <graphic>
+                                    <FontAwesomeIcon iconName="TH_LIST" size="2em" styleClass="menu-bar-btns-icon" text="" />
+                                 </graphic>
+                              </JFXButton>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" styleClass="menu-bar-search-field-box" HBox.hgrow="ALWAYS">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="680.0" HBox.hgrow="ALWAYS" />
                            </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-                  <Tab text="Untitled Tab">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-               </tabs>
-            </JFXTabPane>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="1332.0" prefWidth="740.0" />
+               </children>
+            </VBox>
          </center>
       </BorderPane>
    </children>
