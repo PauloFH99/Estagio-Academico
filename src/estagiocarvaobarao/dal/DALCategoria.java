@@ -16,13 +16,13 @@ public class DALCategoria {
     }
 
     public boolean alterar(Categoria c) {
-        String sql = "update categoria_produto set descricao='#1' where codigod=" + c.getCodigo();
+        String sql = "update categoria_produto set descricao='#1' where codigo=" + c.getCodigo();
         sql = sql.replace("#1", c.getDescricao());
         return Banco.getCon().manipular(sql);
     }
 
     public boolean apagar(int codigo) {
-        return Banco.getCon().manipular("delete from categoria_produto where codigo=" + codigo + " order by descricao");
+        return Banco.getCon().manipular("delete from categoria_produto where codigo=" + codigo);
     }
 
     public Categoria get(int codigo) {
@@ -41,7 +41,7 @@ public class DALCategoria {
 
     public List<Categoria> get(String filtro) {
         List<Categoria> cat = new ArrayList();
-        String sql = "SELECT * FROM categoria_produto";
+        String sql = "select * from categoria_produto";
 
         if (!filtro.isEmpty()) {
             sql += " where " + filtro;
@@ -59,7 +59,7 @@ public class DALCategoria {
 
     public int getC(String filtro) {
         List<Categoria> cat = new ArrayList();
-        String sql = "SELECT * FROM categoria_produto where descricao=" + "'" + filtro + "'";
+        String sql = "select * from categoria_produto where descricao=" + "'" + filtro + "'";
         int cod = 0;
 
         ResultSet rs = Banco.getCon().consultar(sql);

@@ -24,6 +24,8 @@ import javafx.stage.Modality;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import javafx.stage.Stage;
 
@@ -37,6 +39,8 @@ public class TelaAutenticacaoController implements Initializable {
     private TextField txLogin;
     @FXML
     private PasswordField psSenha;
+    @FXML
+    private Pane conteudo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -133,4 +137,11 @@ public class TelaAutenticacaoController implements Initializable {
 //        } catch (Exception e) {
 //        }
 //    }
+
+    @FXML
+    private void abrir_registro(MouseEvent event) throws IOException {
+         Parent cadFunc = FXMLLoader.load(getClass().getResource("TelaFuncionarioCad.fxml"));
+         conteudo.getChildren().removeAll();
+         conteudo.getChildren().setAll(cadFunc);
+    }
 }

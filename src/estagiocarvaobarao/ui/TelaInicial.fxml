@@ -28,6 +28,12 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Cadastro">
                         <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadCategorias" text="Categorias" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadCliente" text="Cliente" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadDespesas" text="Despesas" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadFornecedor" text="Fornecedores" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadFuncionario" text="Funcionarios" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadNivelFuncionarios" text="NivelFuncioanrios" />
                           <MenuItem mnemonicParsing="false" onAction="#clkCadProduto" text="Produtos" />
                               <MenuItem mnemonicParsing="false" text="Close" />
                         </items>

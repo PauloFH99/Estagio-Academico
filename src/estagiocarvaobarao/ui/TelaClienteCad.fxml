@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaClienteCadController">
+   <children>
+      <BorderPane prefHeight="619.0" prefWidth="610.0">
+         <bottom>
+            <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="14.0" prefHeight="191.0" prefWidth="586.0">
+                     <children>
+                        <HBox prefHeight="59.0" prefWidth="600.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="rbnome" layoutX="14.0" onAction="#evRbNome" selected="true" text="Nome ">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Pesquisa1" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="rbcpf" layoutX="14.0" layoutY="24.0" onAction="#evRbCpf" text="Cpf" toggleGroup="$Pesquisa1" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="57.0" prefWidth="501.0">
+                                 <children>
+                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe o nome do usuario ou cpf...">
+                                       <padding>
+                                          <Insets right="15.0" top="15.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                    <JFXButton fx:id="btpesquisar" layoutX="311.0" layoutY="11.0" onAction="#clkPesquisar" prefHeight="35.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tabela" onMouseClicked="#evtTabela" prefHeight="136.0" prefWidth="576.0">
+                           <columns>
+                              <TableColumn fx:id="colcod" prefWidth="77.0" text="Código" />
+                              <TableColumn fx:id="colnome" prefWidth="135.0" text="Nome" />
+                              <TableColumn fx:id="colcpf" prefWidth="120.0" text="Cpf" />
+                              <TableColumn fx:id="coltelefone" prefWidth="112.0" text="Telefone" />
+                              <TableColumn fx:id="colativo" prefWidth="112.0" text="Ativo" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <Pane fx:id="pndados" prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIcon iconName="ARROW_LEFT" layoutX="21.0" layoutY="29.0" onMouseClicked="#voltar_menu" size="1.5em" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXCheckBox fx:id="chkAtivo" layoutX="240.0" layoutY="53.0" selected="true" text="Ativo" />
+                  <JFXTextField fx:id="txnome" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="501.0" promptText="Nome *" />
+                  <JFXTextField fx:id="txcpf" labelFloat="true" layoutX="80.0" layoutY="129.0" prefHeight="25.0" prefWidth="135.0" promptText="Cpf  *" />
+                  <JFXTextField fx:id="txendereco" labelFloat="true" layoutX="238.0" layoutY="129.0" prefHeight="25.0" prefWidth="343.0" promptText="Endereço *" />
+                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="79.0" layoutY="170.0" prefHeight="25.0" prefWidth="95.0" promptText="Número *" />
+                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="199.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" promptText="Bairro *" />
+                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="440.0" layoutY="169.0" prefHeight="25.0" prefWidth="143.0" promptText="Telefone *" />
+                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="79.0" layoutY="207.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="57.0" promptText="Código" />
+                  <JFXButton fx:id="btnpesquisarcid" layoutX="147.0" layoutY="207.0" onAction="#evtProcurarCidade" />
+                  <JFXTextField fx:id="txcid" labelFloat="true" layoutX="211.0" layoutY="207.0" prefHeight="25.0" prefWidth="215.0" promptText="Cidade *" />
+                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="441.0" layoutY="207.0" prefHeight="25.0" prefWidth="144.0" promptText="Cep *" />
+                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="80.0" layoutY="249.0" prefHeight="25.0" prefWidth="347.0" promptText="Email *" />
+                  <JFXTextField fx:id="txlimite" labelFloat="true" layoutX="80.0" layoutY="288.0" prefHeight="25.0" prefWidth="175.0" promptText="Limite Fiado *" />
+                  <DatePicker layoutX="305.0" layoutY="302.0" />
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <Pane fx:id="pnbtn" prefHeight="54.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btnovo" layoutX="26.0" layoutY="12.0" onAction="#clknovo" prefHeight="30.0" prefWidth="94.0" ripplerFill="#3e24d3" text="Novo" />
+                  <JFXButton fx:id="btalterar" layoutX="147.0" layoutY="12.0" onAction="#clkalterar" prefHeight="30.0" prefWidth="94.0" text="Alterar" />
+                  <JFXButton fx:id="btapagar" layoutX="278.0" layoutY="12.0" onAction="#clkapagar" prefHeight="30.0" prefWidth="94.0" text="Apagar" />
+                  <JFXButton fx:id="btconfirmar" layoutX="386.0" layoutY="12.0" onAction="#clkconfirmar" prefHeight="30.0" prefWidth="91.0" ripplerFill="#26d157" text="Confirmar" />
+                  <JFXButton fx:id="btcancelar" layoutX="482.0" layoutY="13.0" onAction="#clkcancelar" prefHeight="30.0" prefWidth="94.0" ripplerFill="#d14326" text="Cancelar" />
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

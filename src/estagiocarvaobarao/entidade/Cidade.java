@@ -1,6 +1,7 @@
 package estagiocarvaobarao.entidade;
 
 public class Cidade {
+
     private int cid_cod;
     private int est_sgl;
     private String cid_nome;
@@ -16,7 +17,7 @@ public class Cidade {
     public Cidade(int cid_cod) {
         this.cid_cod = cid_cod;
     }
-      
+
     public Cidade(int cid_cod, int est_sgl, String cid_nome) {
         this.cid_cod = cid_cod;
         this.est_sgl = est_sgl;
@@ -46,4 +47,10 @@ public class Cidade {
     public void setCid_nome(String cid_nome) {
         this.cid_nome = cid_nome;
     }
+
+    @Override
+    public String toString() {
+        return cid_nome;
+    }
+
 }
