@@ -18,10 +18,10 @@ Sistemas de Estagio Acadêmico
     <img src="https://github.com/PauloFH99/Estagio-Academico/blob/master/src/estagiocarvaobarao/ui/icons/Tela.PNG"/>
     <br>
      Home
-    <img src="https://https://github.com/PauloFH99/Estagio-Academico/tree/master/src/estagiocarvaobarao/ui/icons/Home.PNG"/>
+    <img src="https://github.com/PauloFH99/Estagio-Academico/tree/master/src/estagiocarvaobarao/ui/icons/Home.PNG"/>
      <br>
      Venda
-    <img src="https://https://github.com/PauloFH99/Estagio-Academico/tree/master/src/estagiocarvaobarao/ui/icons/Venda.PNG"/>
+    <img src="https://github.com/PauloFH99/Estagio-Academico/blob/master/src/estagiocarvaobarao/ui/icons/Venda.PNG"/>
     
   
 
