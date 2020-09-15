@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaClienteCadController">
+<AnchorPane id="AnchorPane" prefHeight="744.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaClienteCadController">
    <children>
-      <BorderPane prefHeight="619.0" prefWidth="610.0">
+      <BorderPane prefHeight="744.0" prefWidth="660.0">
          <bottom>
             <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -58,22 +58,27 @@
          <center>
             <Pane fx:id="pndados" prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <FontAwesomeIcon iconName="ARROW_LEFT" layoutX="21.0" layoutY="29.0" onMouseClicked="#voltar_menu" size="1.5em" />
-                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
-                  <JFXCheckBox fx:id="chkAtivo" layoutX="240.0" layoutY="53.0" selected="true" text="Ativo" />
-                  <JFXTextField fx:id="txnome" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="501.0" promptText="Nome *" />
-                  <JFXTextField fx:id="txcpf" labelFloat="true" layoutX="80.0" layoutY="129.0" prefHeight="25.0" prefWidth="135.0" promptText="Cpf  *" />
-                  <JFXTextField fx:id="txendereco" labelFloat="true" layoutX="238.0" layoutY="129.0" prefHeight="25.0" prefWidth="343.0" promptText="Endereço *" />
-                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="79.0" layoutY="170.0" prefHeight="25.0" prefWidth="95.0" promptText="Número *" />
-                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="199.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" promptText="Bairro *" />
-                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="440.0" layoutY="169.0" prefHeight="25.0" prefWidth="143.0" promptText="Telefone *" />
-                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="79.0" layoutY="207.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="57.0" promptText="Código" />
-                  <JFXButton fx:id="btnpesquisarcid" layoutX="147.0" layoutY="207.0" onAction="#evtProcurarCidade" />
-                  <JFXTextField fx:id="txcid" labelFloat="true" layoutX="211.0" layoutY="207.0" prefHeight="25.0" prefWidth="215.0" promptText="Cidade *" />
-                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="441.0" layoutY="207.0" prefHeight="25.0" prefWidth="144.0" promptText="Cep *" />
-                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="80.0" layoutY="249.0" prefHeight="25.0" prefWidth="347.0" promptText="Email *" />
-                  <JFXTextField fx:id="txlimite" labelFloat="true" layoutX="80.0" layoutY="288.0" prefHeight="25.0" prefWidth="175.0" promptText="Limite Fiado *" />
-                  <DatePicker layoutX="305.0" layoutY="302.0" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="9.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXCheckBox fx:id="chkAtivo" layoutX="240.0" layoutY="13.0" selected="true" text="Ativo" />
+                  <JFXTextField fx:id="txnome" labelFloat="true" layoutX="79.0" layoutY="63.0" prefHeight="31.0" prefWidth="285.0" promptText="Nome *" />
+                  <JFXTextField fx:id="txcpf" labelFloat="true" layoutX="377.0" layoutY="63.0" onKeyPressed="#validaCPf" prefHeight="31.0" prefWidth="198.0" promptText="Cpf/Cnpj  *" />
+                  <JFXTextField fx:id="txendereco" labelFloat="true" layoutX="79.0" layoutY="128.0" prefHeight="31.0" prefWidth="502.0" promptText="Endereço *" />
+                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="79.0" layoutY="195.0" prefHeight="25.0" prefWidth="95.0" promptText="Número *" />
+                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="199.0" layoutY="195.0" prefHeight="25.0" prefWidth="225.0" promptText="Bairro *" />
+                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="440.0" layoutY="194.0" prefHeight="25.0" prefWidth="143.0" promptText="Telefone *" />
+                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="79.0" layoutY="264.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="57.0" promptText="Código" />
+                  <JFXButton fx:id="btnpesquisarcid" layoutX="147.0" layoutY="257.0" onAction="#evtProcurarCidade" prefHeight="30.0" prefWidth="46.0">
+                     <graphic>
+                        <FontAwesomeIcon iconName="SEARCH" size="2em" />
+                     </graphic></JFXButton>
+                  <JFXTextField fx:id="txcid" editable="false" labelFloat="true" layoutX="211.0" layoutY="262.0" prefHeight="25.0" prefWidth="215.0" promptText="Cidade *" />
+                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="441.0" layoutY="262.0" prefHeight="25.0" prefWidth="144.0" promptText="Cep *" />
+                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="80.0" layoutY="331.0" prefHeight="25.0" prefWidth="347.0" promptText="Email *" />
+                  <JFXTextField fx:id="txlimite" labelFloat="true" layoutX="80.0" layoutY="404.0" prefHeight="25.0" prefWidth="175.0" promptText="Limite Fiado *" />
+                  <DatePicker fx:id="dtdata" layoutX="305.0" layoutY="404.0" />
+                  <Label fx:id="lbErroData" ellipsisString="" layoutX="306.0" layoutY="442.0" prefHeight="21.0" prefWidth="303.0" textFill="#eb1818" />
+                  <Label layoutX="307.0" layoutY="383.0" prefHeight="21.0" prefWidth="218.0" text="Data de cadastro" />
+                  <Label fx:id="lbErroCPF" ellipsisString="" layoutX="377.0" layoutY="102.0" prefHeight="21.0" prefWidth="275.0" textFill="#ee1212" />
                </children>
             </Pane>
          </center>

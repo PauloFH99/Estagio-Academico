@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaProdCadController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaProdCadController">
    <children>
-      <BorderPane prefHeight="530.0" prefWidth="600.0">
+      <BorderPane prefHeight="530.0" prefWidth="740.0">
          <top>
             <Pane fx:id="pnbtn" prefHeight="59.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
@@ -31,21 +31,26 @@
          <center>
             <Pane fx:id="pndados" prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
-                  <JFXTextField fx:id="txdescricao" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="323.0" promptText="Descrição *" />
-                  <JFXComboBox fx:id="cbCat" layoutX="444.0" layoutY="89.0" prefHeight="25.0" prefWidth="135.0" />
-                  <JFXTextField fx:id="txmin" labelFloat="true" layoutX="79.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Minimo *" />
-                  <JFXTextField fx:id="txmax" labelFloat="true" layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="157.0" promptText="Estoque Maximo *" />
-                  <JFXTextField fx:id="txfisi" labelFloat="true" layoutX="444.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Estoque Físico *" />
-                  <JFXTextField fx:id="txpreco" labelFloat="true" layoutX="79.0" layoutY="190.0" prefHeight="25.0" prefWidth="135.0" promptText="Preço *" />
-                  <JFXCheckBox fx:id="chkAtivo" layoutX="266.0" layoutY="203.0" selected="true" text="Ativo" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="45.0" layoutY="30.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXCheckBox fx:id="chkAtivo" layoutX="218.0" layoutY="35.0" prefHeight="21.0" prefWidth="115.0" selected="true" text="Ativo" />
+                  <JFXTextField fx:id="txdescricao" labelFloat="true" layoutX="45.0" layoutY="82.0" prefHeight="25.0" prefWidth="360.0" promptText="Descrição *" />
+                  <JFXComboBox fx:id="cbCat" labelFloat="true" layoutX="506.0" layoutY="82.0" prefHeight="31.0" prefWidth="201.0" promptText="Categoria do Produto *" />
+                  <JFXTextField fx:id="txmin" labelFloat="true" layoutX="45.0" layoutY="140.0" prefHeight="25.0" prefWidth="274.0" promptText="Estoque Minimo *" />
+                  <JFXTextField fx:id="txmax" labelFloat="true" layoutX="393.0" layoutY="140.0" prefHeight="25.0" prefWidth="273.0" promptText="Estoque Maximo *" />
+                  <JFXTextField fx:id="txfisi" labelFloat="true" layoutX="45.0" layoutY="200.0" prefHeight="25.0" prefWidth="286.0" promptText="Estoque Físico *" />
+                  <JFXTextField fx:id="txpreco" labelFloat="true" layoutX="372.0" layoutY="200.0" prefHeight="25.0" prefWidth="162.0" promptText="Preço *" />
+                  <Label fx:id="lbestmin" disable="true" layoutX="46.0" layoutY="173.0" prefHeight="17.0" prefWidth="343.0" textFill="#f10404" />
+                  <Label fx:id="lbestmax" disable="true" layoutX="392.0" layoutY="173.0" prefHeight="17.0" prefWidth="343.0" textFill="#f10404" />
+                  <Label fx:id="lbestfisi" layoutX="45.0" layoutY="231.0" prefHeight="17.0" prefWidth="311.0" textFill="#f10404" />
+                  <JFXTextField fx:id="txpeso" labelFloat="true" layoutX="564.0" layoutY="200.0" prefHeight="25.0" prefWidth="162.0" promptText="Peso do Saco *" />
+                  <Label fx:id="lbpeso" disable="true" layoutX="564.0" layoutY="231.0" prefHeight="21.0" prefWidth="168.0" textFill="#f10404" />
                </children>
             </Pane>
          </center>
          <bottom>
             <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="600.0">
+                  <VBox prefHeight="200.0" prefWidth="740.0">
                      <children>
                         <HBox prefHeight="59.0" prefWidth="600.0">
                            <children>
@@ -67,13 +72,18 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <TableView fx:id="tabela" onMouseClicked="#evtTabela" prefHeight="171.0" prefWidth="600.0">
+                        <TableView fx:id="tabela" onMouseClicked="#evtTabela" prefHeight="149.0" prefWidth="578.0">
                            <columns>
                               <TableColumn fx:id="colcod" prefWidth="75.0" text="Código" />
+                              <TableColumn fx:id="colcat" prefWidth="111.0" text="Categoria" />
                               <TableColumn fx:id="coldescricao" prefWidth="137.0" text="Descrição" />
                               <TableColumn fx:id="colpreco" prefWidth="90.0" text="Preço" />
-                              <TableColumn fx:id="colcat" prefWidth="111.0" text="Categoria" />
+                              <TableColumn fx:id="colestfisi" prefWidth="111.0" text="Estoque Físico" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           
                         </TableView>
                      </children>
                   </VBox>

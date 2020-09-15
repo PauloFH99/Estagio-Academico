@@ -11,11 +11,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaFornecedorCadController">
    <children>
-      <BorderPane prefHeight="619.0" prefWidth="610.0">
+      <BorderPane prefHeight="737.0" prefWidth="814.0">
          <bottom>
             <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="14.0" prefHeight="191.0" prefWidth="586.0">
+                  <VBox layoutX="14.0" prefHeight="191.0" prefWidth="788.0">
                      <children>
                         <HBox prefHeight="59.0" prefWidth="600.0">
                            <children>
@@ -29,14 +29,14 @@
                                     <JFXRadioButton fx:id="rbcnpj" layoutX="14.0" layoutY="24.0" text="Cnpj" toggleGroup="$Pesquisa" />
                                  </children>
                               </Pane>
-                              <Pane prefHeight="57.0" prefWidth="501.0">
+                              <Pane prefHeight="57.0" prefWidth="593.0">
                                  <children>
-                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe o nome fantasia do fornecedor ou cnpj...">
+                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutX="6.0" layoutY="11.0" prefHeight="36.0" prefWidth="427.0" promptText="Informe o nome fantasia do fornecedor ou cnpj...">
                                        <padding>
                                           <Insets right="15.0" top="15.0" />
                                        </padding>
                                     </JFXTextField>
-                                    <JFXButton fx:id="btpesquisar" layoutX="311.0" layoutY="11.0" onAction="#clkPesquisar" prefHeight="35.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar" />
+                                    <JFXButton fx:id="btpesquisar" layoutX="418.0" layoutY="11.0" onAction="#clkPesquisar" prefHeight="35.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar" />
                                  </children>
                               </Pane>
                            </children>
@@ -47,6 +47,7 @@
                               <TableColumn fx:id="colnome" prefWidth="135.0" text="Nome" />
                               <TableColumn fx:id="colcid" prefWidth="120.0" text="Cidade" />
                               <TableColumn fx:id="colfone" prefWidth="112.0" text="Telefone" />
+                              <TableColumn fx:id="colativo" prefWidth="112.0" text="Ativo" />
                            </columns>
                         </TableView>
                      </children>
@@ -57,22 +58,27 @@
          <center>
             <Pane fx:id="pndados" prefHeight="222.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="41.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
                   <JFXTextField fx:id="txfantasia" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="323.0" promptText="Nome Fantasia *" />
-                  <JFXTextField fx:id="txcnpj" labelFloat="true" layoutX="423.0" layoutY="89.0" prefHeight="25.0" prefWidth="135.0" promptText="Cnpj/Cpf *" />
-                  <JFXTextField fx:id="txrazasocial" labelFloat="true" layoutX="79.0" layoutY="129.0" prefHeight="25.0" prefWidth="135.0" promptText="Razão Social *" />
-                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="266.0" layoutY="129.0" prefHeight="25.0" prefWidth="157.0" promptText="Telefone *" />
-                  <JFXCheckBox fx:id="chkAtivo" layoutX="476.0" layoutY="136.0" selected="true" text="Ativo" />
-                  <JFXTextField fx:id="txlogradouro" labelFloat="true" layoutX="79.0" layoutY="170.0" prefHeight="25.0" prefWidth="214.0" promptText="Logradouro *" />
-                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="305.0" layoutY="169.0" prefHeight="25.0" prefWidth="135.0" promptText="Bairro *" />
-                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="461.0" layoutY="169.0" prefHeight="25.0" prefWidth="95.0" promptText="Número *" />
-                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="79.0" layoutY="207.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="57.0" promptText="Código" />
-                  <JFXButton fx:id="btnpesquisarcid" layoutX="147.0" layoutY="207.0" onAction="#evtProcurarCidade" />
-                  <JFXTextField fx:id="txcid" labelFloat="true" layoutX="211.0" layoutY="207.0" prefHeight="25.0" prefWidth="233.0" promptText="Cidade *" />
-                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="461.0" layoutY="207.0" prefHeight="25.0" prefWidth="95.0" promptText="Cep *" />
-                  <JFXTextField fx:id="txnomecontato" labelFloat="true" layoutX="79.0" layoutY="248.0" prefHeight="25.0" prefWidth="135.0" promptText="Nome do contato *" />
-                  <JFXTextField fx:id="txfonecontato" labelFloat="true" layoutX="266.0" layoutY="248.0" prefHeight="25.0" prefWidth="157.0" promptText="Telefone do contato *" />
-                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="79.0" layoutY="287.0" prefHeight="25.0" prefWidth="477.0" promptText="Email *" />
+                  <JFXTextField fx:id="txcnpj" labelFloat="true" layoutX="423.0" layoutY="89.0" onKeyPressed="#validaCNPJ" prefHeight="31.0" prefWidth="262.0" promptText="Cnpj/Cpf *" />
+                  <JFXTextField fx:id="txrazasocial" labelFloat="true" layoutX="79.0" layoutY="157.0" prefHeight="31.0" prefWidth="324.0" promptText="Razão Social *" />
+                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="423.0" layoutY="159.0" prefHeight="31.0" prefWidth="166.0" promptText="Telefone *" />
+                  <JFXCheckBox fx:id="chkAtivo" layoutX="623.0" layoutY="164.0" selected="true" text="Ativo" />
+                  <JFXTextField fx:id="txlogradouro" labelFloat="true" layoutX="79.0" layoutY="225.0" prefHeight="31.0" prefWidth="270.0" promptText="Logradouro *" />
+                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="368.0" layoutY="231.0" prefHeight="25.0" prefWidth="95.0" promptText="Número *" />
+                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="481.0" layoutY="225.0" prefHeight="31.0" prefWidth="204.0" promptText="Bairro *" />
+                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="79.0" layoutY="290.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="57.0" promptText="Código" />
+                  <JFXButton fx:id="btnpesquisarcid" ellipsisString="" layoutX="157.0" layoutY="290.0" onAction="#evtProcurarCidade" prefHeight="31.0" prefWidth="36.0">
+                     <graphic>
+                        <FontAwesomeIcon iconName="SEARCH" />
+                     </graphic></JFXButton>
+                  <JFXTextField fx:id="txcid" editable="false" labelFloat="true" layoutX="207.0" layoutY="290.0" prefHeight="31.0" prefWidth="261.0" promptText="Cidade *" />
+                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="497.0" layoutY="290.0" prefHeight="31.0" prefWidth="188.0" promptText="Cep *" />
+                  <JFXTextField fx:id="txnomecontato" labelFloat="true" layoutX="79.0" layoutY="353.0" prefHeight="25.0" prefWidth="135.0" promptText="Nome do contato *" />
+                  <JFXTextField fx:id="txfonecontato" labelFloat="true" layoutX="266.0" layoutY="353.0" prefHeight="25.0" prefWidth="157.0" promptText="Telefone do contato *" />
+                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="79.0" layoutY="415.0" prefHeight="25.0" prefWidth="477.0" promptText="Email *" />
+                  <Label fx:id="lbErroCNPJ" ellipsisString="" layoutX="423.0" layoutY="128.0" prefHeight="21.0" prefWidth="348.0" textFill="#dd0606" />
+                  <JFXComboBox fx:id="cbCatprod" labelFloat="true" layoutX="499.0" layoutY="353.0" prefHeight="25.0" prefWidth="197.0" promptText="Categoria de Produto Fornecido" />
                </children>
             </Pane>
          </center>

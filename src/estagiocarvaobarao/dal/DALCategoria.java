@@ -31,7 +31,7 @@ public class DALCategoria {
         ResultSet rs = Banco.getCon().consultar(sql);
         try {
             if (rs.next()) {
-                cat = new Categoria(codigo, rs.getString("descricao"));
+                cat = new Categoria(rs.getInt("codigo"), rs.getString("descricao"));
             }
         } catch (SQLException ex) {
 
@@ -46,6 +46,7 @@ public class DALCategoria {
         if (!filtro.isEmpty()) {
             sql += " where " + filtro;
         }
+        sql+=" order by descricao";
         ResultSet rs = Banco.getCon().consultar(sql);
         try {
             while (rs.next()) {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.EstoqueController">
+   <children>
+      <TableView fx:id="tabelaA" layoutX="47.0" layoutY="57.0" prefHeight="234.0" prefWidth="398.0">
+        <columns>
+            <TableColumn fx:id="colCat" prefWidth="75.0" text="Categoria" />
+          <TableColumn fx:id="colDesc" prefWidth="75.0" text="Produto" />
+          <TableColumn fx:id="colQtade" prefWidth="75.0" text="Quantidade" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView fx:id="tabelaC" layoutX="359.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <columns>
+            <TableColumn prefWidth="75.0" text="Produto" />
+            <TableColumn prefWidth="75.0" text="Quantidade" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="57.0" layoutY="21.0" prefHeight="17.0" prefWidth="171.0" text="Armázem" />
+      <Label layoutX="359.0" layoutY="21.0" prefHeight="17.0" prefWidth="171.0" text="Casa" visible="false" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="139.0" prefWidth="1192.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.MenuFormPagtoController">
+   <children>
+      <Pane prefHeight="139.0" prefWidth="1192.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;">
+         <children>
+            <Label layoutX="50.0" layoutY="14.0" prefHeight="14.0" prefWidth="158.0" text="Data 1° vencimento *" />
+            <DatePicker fx:id="dpprivenci" layoutX="50.0" layoutY="26.0" />
+            <JFXTextField fx:id="txqtdeparcelas" labelFloat="true" layoutX="266.0" layoutY="26.0" prefHeight="22.0" prefWidth="249.0" promptText="Quantidade de parcelas *" />
+            <JFXTextField fx:id="txdiasentreparc" labelFloat="true" layoutX="559.0" layoutY="26.0" prefHeight="22.0" prefWidth="249.0" promptText="Dias entre parcelas *" />
+            <JFXButton fx:id="btnconfirmar" layoutX="894.0" layoutY="21.0" onAction="#evtConfirmar" prefHeight="33.0" prefWidth="231.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Confirmar" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <FontAwesomeIcon fill="WHITE" iconName="CHECK" layoutX="909.0" layoutY="43.0" size="1.5em" />
+            <Label layoutX="371.0" layoutY="75.0" prefHeight="14.0" prefWidth="274.0" text="FORMA DE PAGAMENTO">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="76.0" prefHeight="14.0" prefWidth="274.0" text="DATA  1° VENCIMENTO ">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="661.0" layoutY="76.0" prefHeight="14.0" prefWidth="197.0" text="QUANTIDADE DE PARCELAS">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Pane layoutX="43.0" layoutY="95.0" prefHeight="1.0" prefWidth="1106.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+            <Pane layoutX="43.0" layoutY="120.0" prefHeight="1.0" prefWidth="1106.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+            <Label fx:id="lbforma" layoutX="400.0" layoutY="98.0" prefHeight="14.0" prefWidth="197.0" text="CARTÃO DE CRÉDITO" visible="false">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbqtdeparc" layoutX="666.0" layoutY="101.0" prefHeight="14.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon fx:id="ftformpagt" iconName="CREDIT_CARD" layoutX="376.0" layoutY="111.0" size="1.5em" visible="false" />
+            <Label fx:id="lbdata" layoutX="71.0" layoutY="99.0" prefHeight="14.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbdiasentreparc" layoutX="928.0" layoutY="102.0" prefHeight="14.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="923.0" layoutY="77.0" prefHeight="14.0" prefWidth="197.0" text="DIAS ENTRE PARCELAS">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children></Pane>
+   </children>
+</VBox>

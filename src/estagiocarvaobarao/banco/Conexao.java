@@ -84,7 +84,7 @@ public class Conexao {
            Statement statement = connect.createStatement();
              //ResultSet.TYPE_SCROLL_INSENSITIVE,
              //ResultSet.CONCUR_READ_ONLY);
-           rs = statement.executeQuery( sql );
+           rs = statement.executeQuery(sql);
            //statement.close();
         }
         catch ( SQLException sqlex )

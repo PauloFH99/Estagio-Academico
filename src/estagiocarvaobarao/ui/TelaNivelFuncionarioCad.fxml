@@ -19,19 +19,10 @@
                      <children>
                         <HBox prefHeight="59.0" prefWidth="600.0">
                            <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <JFXRadioButton fx:id="rbcodigo" layoutX="14.0" onAction="#evRbCodigo" selected="true" text="Código">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="Pesquisa" />
-                                       </toggleGroup>
-                                    </JFXRadioButton>
-                                    <JFXRadioButton fx:id="rbdescricao" layoutX="14.0" layoutY="24.0" onAction="#evRbDescricao" text="Descrição" toggleGroup="$Pesquisa" />
-                                 </children>
-                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
                               <Pane prefHeight="57.0" prefWidth="501.0">
                                  <children>
-                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe a descrição  ou código...">
+                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe a descrição...">
                                        <padding>
                                           <Insets right="15.0" top="15.0" />
                                        </padding>

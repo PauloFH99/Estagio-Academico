@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="716.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaEmpresaParametrosCadController">
+   <children>
+      <BorderPane prefHeight="716.0" prefWidth="1120.0">
+         <bottom>
+            <Pane fx:id="pnpesquisa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="54.0" layoutY="5.0" prefHeight="191.0" prefWidth="1019.0">
+                     <children>
+                        <HBox prefHeight="59.0" prefWidth="600.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="rbfantasia" layoutX="35.0" layoutY="9.0" selected="true" text="Nome Fantasia">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Pesquisa" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="rbcnpj" layoutX="35.0" layoutY="33.0" text="Cnpj" toggleGroup="$Pesquisa" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="59.0" prefWidth="822.0">
+                                 <children>
+                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutX="7.0" layoutY="13.0" prefHeight="32.0" prefWidth="538.0" promptText="Informe o nome fantasia do fornecedor ou cnpj...">
+                                       <padding>
+                                          <Insets right="15.0" top="15.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                    <JFXButton fx:id="btpesquisar" layoutX="572.0" layoutY="12.0" onAction="#clkPesquisar" prefHeight="35.0" prefWidth="121.0" ripplerFill="#d74326" text="Pesquisar" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tabela" onMouseClicked="#evtTabela" prefHeight="123.0" prefWidth="871.0">
+                           <columns>
+                              <TableColumn fx:id="colcod" prefWidth="63.0" text="Código" />
+                              <TableColumn fx:id="colnome" prefWidth="189.0" text="Nome" />
+                              <TableColumn fx:id="colcid" prefWidth="129.0" text="Cidade" />
+                              <TableColumn fx:id="colfone" prefWidth="138.0" text="Telefone" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <Pane fx:id="pndados" prefHeight="424.0" prefWidth="563.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="22.0" layoutY="8.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXTextField fx:id="txfantasia" labelFloat="true" layoutX="22.0" layoutY="56.0" prefHeight="25.0" prefWidth="334.0" promptText="Nome Fantasia *" />
+                  <JFXTextField fx:id="txcnpj" labelFloat="true" layoutX="371.0" layoutY="50.0" onKeyPressed="#validaCNPJ" prefHeight="31.0" prefWidth="280.0" promptText="Cnpj  *" />
+                  <JFXTextField fx:id="txrazasocial" labelFloat="true" layoutX="22.0" layoutY="123.0" prefHeight="25.0" prefWidth="231.0" promptText="Razão Social *" />
+                  <JFXTextField fx:id="txtelefone" labelFloat="true" layoutX="257.0" layoutY="123.0" prefHeight="25.0" prefWidth="158.0" promptText="Telefone *" />
+                  <JFXTextField fx:id="txie" labelFloat="true" layoutX="423.0" layoutY="123.0" prefHeight="25.0" prefWidth="228.0" promptText="Inscrição Estadual*" />
+                  <JFXTextField fx:id="txlogradouro" labelFloat="true" layoutX="23.0" layoutY="193.0" prefHeight="25.0" prefWidth="220.0" promptText="Logradouro *" />
+                  <JFXTextField fx:id="txnum" labelFloat="true" layoutX="264.0" layoutY="193.0" prefHeight="25.0" prefWidth="165.0" promptText="Número *" />
+                  <JFXTextField fx:id="txbairro" labelFloat="true" layoutX="449.0" layoutY="193.0" prefHeight="25.0" prefWidth="202.0" promptText="Bairro *" />
+                  <JFXTextField fx:id="txcodcid" labelFloat="true" layoutX="25.0" layoutY="261.0" onKeyPressed="#onExitCidade" prefHeight="25.0" prefWidth="61.0" promptText="Código" />
+                  <JFXButton fx:id="btnpesquisarcid" layoutX="97.0" layoutY="254.0" onAction="#evtProcurarCidade" prefHeight="30.0" prefWidth="54.0">
+                     <graphic>
+                        <FontAwesomeIcon iconName="SEARCH" size="2em" />
+                     </graphic></JFXButton>
+                  <JFXTextField fx:id="txcid" editable="false" labelFloat="true" layoutX="176.0" layoutY="261.0" prefHeight="25.0" prefWidth="242.0" promptText="Cidade *" />
+                  <JFXTextField fx:id="txcep" labelFloat="true" layoutX="449.0" layoutY="261.0" prefHeight="25.0" prefWidth="207.0" promptText="Cep *" />
+                  <JFXTextField fx:id="txemail" labelFloat="true" layoutX="23.0" layoutY="328.0" prefHeight="25.0" prefWidth="523.0" promptText="Email *" />
+                  <JFXTextField fx:id="txsite" labelFloat="true" layoutX="24.0" layoutY="390.0" prefHeight="25.0" prefWidth="523.0" promptText="Site *" />
+                  <Label fx:id="lbErroCNPJ" ellipsisString="" layoutX="371.0" layoutY="94.0" prefHeight="21.0" prefWidth="331.0" textFill="#f21919" />
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <Pane fx:id="pnbtn" prefHeight="54.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btnovo" layoutX="53.0" layoutY="12.0" onAction="#clknovo" prefHeight="35.0" prefWidth="145.0" ripplerFill="#3e24d3" text="Novo" />
+                  <JFXButton fx:id="btalterar" layoutX="207.0" layoutY="13.0" onAction="#clkalterar" prefHeight="35.0" prefWidth="145.0" text="Alterar" />
+                  <JFXButton fx:id="btapagar" layoutX="367.0" layoutY="11.0" onAction="#clkapagar" prefHeight="35.0" prefWidth="145.0" text="Apagar" />
+                  <JFXButton fx:id="btconfirmar" layoutX="568.0" layoutY="12.0" onAction="#clkconfirmar" prefHeight="35.0" prefWidth="145.0" ripplerFill="#26d157" text="Confirmar" />
+                  <JFXButton fx:id="btcancelar" layoutX="741.0" layoutY="10.0" onAction="#clkcancelar" prefHeight="35.0" prefWidth="145.0" ripplerFill="#d14326" text="Cancelar" />
+               </children>
+            </Pane>
+         </top>
+         <left>
+            <Pane fx:id="pnlogo" prefHeight="327.0" prefWidth="388.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutY="-4.0" prefHeight="324.0" prefWidth="388.0" stylesheets="@css/stylehseet.css">
+                     <children>
+                        <HBox onMouseClicked="#evtbtnImagem" prefHeight="62.0" prefWidth="388.0" styleClass="sidebar-btn">
+                           <children>
+                              <Pane prefHeight="66.0" prefWidth="388.0" style="-fx-background-color: rgb(58,69,88);" styleClass="sidebar" stylesheets="@css/stylehseet.css">
+                                 <children>
+                                    <Label layoutX="88.0" layoutY="14.0" prefHeight="39.0" prefWidth="265.0" text="SUA LOGO GRANDE/PEQUENA" textFill="#b8b1b1">
+                                       <font>
+                                          <Font name="Consolas Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <FontAwesomeIcon iconName="HOME" layoutX="24.0" layoutY="45.0" size="3em" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <Pane prefHeight="256.0" prefWidth="388.0" style="-fx-border-color: rgb(58,69,88);">
+                           <children>
+                              <ImageView fx:id="logo" fitHeight="191.0" fitWidth="329.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+                              <FontAwesomeIcon fx:id="logoIcon" iconName="CAMERA" layoutX="102.0" layoutY="175.0" size="10em" wrappingWidth="183.07142639160156" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -2,7 +2,10 @@ package estagiocarvaobarao.utils;
 
 import estagiocarvaobarao.dal.DALConsulta;
 import estagiocarvaobarao.entidade.Cidade;
+import estagiocarvaobarao.ui.TelaClienteCadController;
+import estagiocarvaobarao.ui.TelaEmpresaParametrosCadController;
 import estagiocarvaobarao.ui.TelaFornecedorCadController;
+import estagiocarvaobarao.ui.TelaFuncionarioCadController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +100,10 @@ public class ConsultaController implements Initializable {
     @FXML
     private void doubleClick(MouseEvent event) {
         cid = tabela.getSelectionModel().getSelectedItem();
+        TelaClienteCadController.setCid(cid);
         TelaFornecedorCadController.setCid(cid);
+        TelaEmpresaParametrosCadController.setCid(cid);
+        TelaFuncionarioCadController.setCid(cid);
         Stage self = (Stage)tabela.getScene().getWindow();
         self.close();
     }

@@ -17,11 +17,10 @@ import java.util.logging.Logger;
 public class DALFuncionario {
 
     public Funcionario getLogin(String usuario, String senha) {
-        String SQL = "select codigo,login,senha,cod_nivel"
+        String SQL = "select codigo,nome,login,senha,cod_nivel,ativo"
                 + " from funcionario"
                 + " where login = '" + usuario.trim() + "'"
-                + " and senha = '" + senha.trim() + "'"
-                + " and ativo = 's'";
+                + " and senha = '" + senha.trim() + "'";
 
         try (Connection conn = Conexao.open()) {
             try (Statement st = conn.createStatement()) {
@@ -30,6 +29,7 @@ public class DALFuncionario {
                         return new Funcionario(rs.getInt("codigo"),
                                 rs.getString("login"),
                                 rs.getString("senha"),
+                                rs.getString("ativo"),
                                 new NivelFuncionario(rs.getInt("cod_nivel")));
                     }
                 }
@@ -99,8 +99,8 @@ public class DALFuncionario {
 
     public List<Funcionario> get(String filtro) {
         List<Funcionario> func = new ArrayList();
-        String SQL = "select f.codigo,f.nome,f.cpf, f.cod_nivel,nf.descricao nivel,case when f.ativo = 'S' then 'Ativo' when f.ativo = 'N'"
-                + " then 'Inativo' end ativo from funcionario f"
+        String SQL = "select f.codigo,f.nome,f.cpf, f.cod_nivel,nf.descricao nivel,case when f.ativo = 'ativo' then 'ativo' when f.ativo = 'não ativo'"
+                + " then 'não ativo' end ativo from funcionario f"
                 + " inner join nivel_funcionario nf on nf.codigo = f.cod_nivel";
 
         if (!filtro.isEmpty()) {
@@ -113,8 +113,7 @@ public class DALFuncionario {
         try {
             while (rs.next()) {
                 func.add(new Funcionario(rs.getInt("codigo"), rs.getString("nome"),
-                        rs.getString("cpf"), rs.getString("ativo"), new NivelFuncionario(rs.getInt("cod_nivel"),
-                        rs.getString("nivel"))));
+                        rs.getString("cpf"), rs.getString("ativo"), new NivelFuncionario().get(rs.getInt("cod_nivel"))));
             }
         } catch (SQLException e) {
         }
@@ -122,7 +121,7 @@ public class DALFuncionario {
         return func;
     }
 
-    public Funcionario getFuncionario(int codigo) {
+    public Funcionario get(int codigo) {
         String SQL = "select * from funcionario where codigo = " + codigo;
         DALNivelFuncionario nf = new DALNivelFuncionario();
 
@@ -154,6 +153,23 @@ public class DALFuncionario {
         }
         return null;
 
+    }
+
+    public List<Funcionario> getAux(int cod) {
+        List<Funcionario> func = new ArrayList();
+        String SQL = "select * from funcionario where codigo <> "+cod;
+        SQL = SQL + " order by nome ";
+
+        ResultSet rs = Banco.getCon().consultar(SQL);
+        try {
+            while (rs.next()) {
+                func.add(new Funcionario(rs.getInt("codigo"), rs.getString("nome"),
+                        rs.getString("cpf"), rs.getString("ativo"), new NivelFuncionario(rs.getInt("cod_nivel"))));
+            }
+        } catch (SQLException e) {
+        }
+
+        return func;
     }
 
 }

@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,16 +21,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import estagiocarvaobarao.EstagioCarvaoBarao;
-import estagiocarvaobarao.dal.DALConsulta;
-import estagiocarvaobarao.dal.DALFornecedor;
+import estagiocarvaobarao.controller.ControllerFornecedor;
+import estagiocarvaobarao.entidade.Categoria;
 import estagiocarvaobarao.entidade.Cidade;
 import estagiocarvaobarao.entidade.Fornecedor;
 import estagiocarvaobarao.utils.MaskFieldUtil;
-import estagiocarvaobarao.utils.Messages;
-import java.io.IOException;
-import java.util.List;
-import javafx.collections.FXCollections;
+import estagiocarvaobarao.utils.Mensagens;
+import estagiocarvaobarao.utils.ValidarCPF;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -38,6 +36,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -87,6 +86,8 @@ public class TelaFornecedorCadController implements Initializable {
     @FXML
     private TableColumn<Fornecedor, String> colfone;
     @FXML
+    private TableColumn<Fornecedor, String> colativo;
+    @FXML
     private JFXTextField txfantasia;
     @FXML
     private JFXTextField txcnpj;
@@ -114,12 +115,22 @@ public class TelaFornecedorCadController implements Initializable {
     private JFXTextField txfonecontato;
     @FXML
     private JFXTextField txemail;
+    @FXML
+    private ToggleGroup Pesquisa;
+    @FXML
+    private JFXRadioButton rbfantasia;
+    @FXML
+    private JFXRadioButton rbcnpj;
+    ControllerFornecedor cf = new ControllerFornecedor();
+    @FXML
+    private Label lbErroCNPJ;
+    @FXML
+    private JFXComboBox<Categoria> cbCatprod;
 
     /**
      * Initializes the controller class.
      */
     public static Cidade cid;
-    
 
     public static Cidade getCid() {
         return cid;
@@ -128,14 +139,6 @@ public class TelaFornecedorCadController implements Initializable {
     public static void setCid(Cidade cid) {
         TelaFornecedorCadController.cid = cid;
     }
-
-   
-    @FXML
-    private ToggleGroup Pesquisa;
-    @FXML
-    private JFXRadioButton rbfantasia;
-    @FXML
-    private JFXRadioButton rbcnpj;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -149,87 +152,139 @@ public class TelaFornecedorCadController implements Initializable {
         colnome.setCellValueFactory(new PropertyValueFactory("nomefantasia"));
         colcid.setCellValueFactory(new PropertyValueFactory("cidade"));
         colfone.setCellValueFactory(new PropertyValueFactory("telefone"));
-        estadoInicial();
+        colativo.setCellValueFactory(new PropertyValueFactory("ativo"));
+        cf.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, tabela, lbErroCNPJ);
     }
 
     private void estadoInicial() {
-        pnpesquisa.setDisable(false);
-        pndados.setDisable(true);
-        btconfirmar.setDisable(true);
-        btcancelar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        btnovo.setDisable(false);
-        ObservableList<Node> componentes = pndados.getChildren();//”limpa” os componentes
-        for (Node n : componentes) {
-            if (n instanceof TextInputControl)//textfield, textarea e htmleditor
-            {
-                ((TextInputControl) n).setText("");
-            }
-            if (n instanceof ComboBox) {
-                ((ComboBox) n).getSelectionModel().select(0);
-            }
-        }
-        carregaTabela("");
-    }
-
-    private int carregaTabela(String filtro) {
-        DALFornecedor dal = new DALFornecedor();
-        List<Fornecedor> res = dal.get(filtro);
-        ObservableList<Fornecedor> modelo;
-        modelo = FXCollections.observableArrayList(res);
-        tabela.setItems(modelo);
-        return res.size();
+        cf.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, tabela, lbErroCNPJ);
     }
 
     private void estadoEdicao() {
+        cf.estadoEdicao(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, cbCatprod);
 
-        pnpesquisa.setDisable(true);
-        pndados.setDisable(false);
-        btconfirmar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        txfantasia.requestFocus();
     }
 
     @FXML
     private void clknovo(ActionEvent event) {
-        estadoEdicao();
+        cf.estadoEdicao(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, cbCatprod);
     }
 
     @FXML
     private void clkalterar(ActionEvent event) {
-        estadoEdicao();
-        Fornecedor f = (Fornecedor) tabela.getSelectionModel().getSelectedItem();
-        txcod.setText("" + f.getCodigo());
-        txfantasia.setText("" + f.getNomefantasia());
-        txcnpj.setText("" + f.getCnpj());
-        txrazasocial.setText("" + f.getRazaosocial());
-        txtelefone.setText("" + f.getTelefone());
-        chkAtivo.setText("" + f.isAtivo());
-        txlogradouro.setText("" + f.getLogradouro());
-        txbairro.setText("" + f.getBairro());
-        txnum.setText("" + f.getNumero());
-        txcodcid.setText(String.valueOf(f.getCidade().getCid_cod()));
-        txcid.setText("");
-        txcep.setText("" + f.getCep());
-        txnomecontato.setText("" + f.getNomecontato());
-        txfonecontato.setText("" + f.getTelefonecontato());
-        txemail.setText("" + f.getEmail());
+        cf.estadoEdicao(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, cbCatprod);
+        cf.alterar(txcod,
+                txcodcid,
+                chkAtivo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, tabela,cbCatprod);
 
     }
 
     @FXML
     private void clkapagar(ActionEvent event) {
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setContentText("Confirma a exclusão");
-        if (a.showAndWait().get() == ButtonType.OK) {
-            DALFornecedor dal = new DALFornecedor();
-            Fornecedor f;
-            f = tabela.getSelectionModel().getSelectedItem();
-            dal.apagar(f.getCodigo());
-            carregaTabela("");
-        }
+        cf.apagar(tabela);
+
     }
 
     private boolean CampoVazio(String valor) {
@@ -245,101 +300,179 @@ public class TelaFornecedorCadController implements Initializable {
         return res;
     }
 
+    public void validar(JFXTextField campo, String texto) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        campo.resetValidation();
+        campo.getValidators().add(validator);
+        validator.setMessage(texto);
+        campo.validate();
+    }
+
+    public void validarCb(JFXComboBox campo) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        campo.resetValidation();
+        campo.getValidators().add(validator);
+        validator.setMessage("Campo não pode estar vazio!");
+        campo.validate();
+    }
+
     @FXML
     private void clkconfirmar(ActionEvent event) {
-        int cod, erro = 0;
-        Messages msg = new Messages();
+        int cod, erro = 0, cod_cat = 0;
+        Mensagens msg = new Mensagens();
+        ValidarCPF valida = new ValidarCPF();
+
         try {
             cod = Integer.parseInt(txcod.getText());
         } catch (Exception e) {
             cod = 0;
         }
-        if (erro == 0) {
-
-            Fornecedor f = new Fornecedor(cod, txfantasia.getText(), txcnpj.getText(), chkAtivo.isSelected(),
-                    txlogradouro.getText(), txbairro.getText(), txnum.getText(),
-                    new Cidade(Integer.parseInt(txcodcid.getText())), txcep.getText(), txnomecontato.getText(),
-                    txfonecontato.getText(), txemail.getText(), txtelefone.getText(), txrazasocial.getText());
-            DALFornecedor dal = new DALFornecedor();
-
-            if (f.getCodigo() == 0) {
-                if (dal.salvar(f)) {
-                    msg.Confirmation("Gravação concluida", "Gravado com Sucesso");
-                } else {
-                    msg.Error("Erro ao gravar!", "Problemas ao Gravar");
-                }
-            } else if (dal.alterar(f)) {
-                msg.Confirmation("Gravação concluida", "Alterado com Sucesso");
-            } else {
-                msg.Error("Erro ao alterar!", "Problemas ao Alterar");
+        if (cbCatprod.getSelectionModel().isEmpty()) {
+            validarCb(cbCatprod);
+            erro = 1;
+        } else {
+            try {
+                cod_cat = cbCatprod.getSelectionModel().getSelectedItem().getCodigo();
+            } catch (Exception e) {
+                cod_cat = 0;
             }
-            estadoInicial();
+        }
+        if (txfantasia.getText().isEmpty()) {
+            validar(txfantasia, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txcnpj.getText().isEmpty()) {
+            validar(txcnpj, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txlogradouro.getText().isEmpty()) {
+            validar(txlogradouro, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txbairro.getText().isEmpty()) {
+            validar(txbairro, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txnum.getText().isEmpty()) {
+            validar(txnum, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txcid.getText().isEmpty()) {
+            validar(txcid, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txcep.getText().isEmpty()) {
+            validar(txcep, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txcnpj.getText().isEmpty()) {
+            validar(txcnpj, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (!txcnpj.getText().isEmpty()) {
+            if (!valida.isValid(txcnpj.getText())) {
+                lbErroCNPJ.setVisible(true);
+                lbErroCNPJ.setText("CPF inválido! Digite o CPF novamente");
+                txcnpj.requestFocus();
+                erro = 1;
+            }
+        }
+        if (txnomecontato.getText().isEmpty()) {
+            validar(txnomecontato, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txfonecontato.getText().isEmpty()) {
+            validar(txfonecontato, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txemail.getText().isEmpty()) {
+            validar(txemail, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txtelefone.getText().isEmpty()) {
+            validar(txtelefone, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+        if (txrazasocial.getText().isEmpty()) {
+            validar(txrazasocial, "Campo não pode estar vazio!");
+            erro = 1;
+        }
+
+        if (erro == 0) {
+            cf.confirmar(cod, pnpesquisa,
+                    pndados,
+                    btconfirmar,
+                    btcancelar,
+                    btapagar,
+                    btalterar,
+                    btnovo,
+                    txfantasia,
+                    txlogradouro,
+                    txnum,
+                    txbairro,
+                    txcnpj,
+                    txcodcid,
+                    txcid,
+                    txcep,
+                    txfonecontato,
+                    txnomecontato,
+                    txtelefone,
+                    txrazasocial,
+                    txemail, chkAtivo, tabela, lbErroCNPJ,cod_cat);
+
         }
     }
 
     @FXML
     private void clkcancelar(ActionEvent event) {
-        if (!pndados.isDisabled())//encontra em estado de edição
-        {
-            estadoInicial();
-        } else {
-            btnovo.getScene().getWindow().hide();//fecha a janela
-        }
+        cf.cancelar(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txfantasia,
+                txlogradouro,
+                txnum,
+                txbairro,
+                txcnpj,
+                txcid,
+                txcep,
+                txfonecontato,
+                txnomecontato,
+                txtelefone,
+                txrazasocial,
+                txemail, tabela, lbErroCNPJ);
+
     }
 
     @FXML
     private void clkPesquisar(ActionEvent event) {
-         if (!txpesquisar.getText().isEmpty()) {
-            if (rbfantasia.isSelected()) {
-                carregaTabela("upper(nomefantasia) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-            } else {
-                if (rbcnpj.isSelected()) {
-                    carregaTabela("upper(cnpj) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-                }
-            }
-        }
-        else
-        {
-             carregaTabela("upper(nomefantasia) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-        }
+        cf.Pesquisar(txpesquisar, rbfantasia, rbcnpj, tabela);
+
     }
 
     @FXML
     private void evtTabela(MouseEvent event) {
-        if (tabela.getSelectionModel().getSelectedIndex() >= 0) {
-            btalterar.setDisable(false);
-            btapagar.setDisable(false);
-        }
+        cf.evtTabela(tabela, btalterar, btapagar);
+
     }
 
-    private void voltar_menu(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("TelaAutenticacao.fxml"));
-        EstagioCarvaoBarao.stage.getScene().setRoot(root);
-    }
-
-    public void pesquisarCidade(Cidade cid) {
-        DALConsulta dal = new DALConsulta();
-        Cidade cidade = dal.getCidade(cid);
-
-        if (cidade != null) {
-            txcodcid.setText(String.valueOf(cidade.getCid_cod()));
-            txcid.setText(cidade.getCid_nome());
-        } else {
-            txcodcid.setText("0");
-            txcid.setText("Valor digitado não encontrado...");
-        }
+    public void pesquisarCidade(int cid_cod) {
+        cf.pesquisarCidade(cid_cod, txcodcid, txcid);
     }
 
     @FXML
     private void onExitCidade(KeyEvent event) {
         if (event.getCode() == KeyCode.TAB && !txcodcid.getText().isEmpty()) {
-            pesquisarCidade(new Cidade(Integer.parseInt(txcodcid.getText())));
+            pesquisarCidade(Integer.parseInt(txcodcid.getText()));
         }
     }
 
     @FXML
     private void evtProcurarCidade(ActionEvent event) {
-        Messages msg = new Messages();
+        Mensagens msg = new Mensagens();
         try {
             Stage stage = new Stage();
             Parent pesquisa = FXMLLoader.load(getClass().getResource("/estagiocarvaobarao/utils/Consulta.fxml"));
@@ -351,7 +484,7 @@ public class TelaFornecedorCadController implements Initializable {
             stage.setTitle("Consulta de cidades");
             stage.showAndWait();
             if (cid != null) {
-                pesquisarCidade(cid);
+                pesquisarCidade(cid.getCid_cod());
                 txcep.requestFocus();
             }
 
@@ -362,6 +495,21 @@ public class TelaFornecedorCadController implements Initializable {
 
     private void exit(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void validaCNPJ(KeyEvent event) {
+        if (event.getCode() == KeyCode.TAB && !txcnpj.getText().isEmpty()) {
+            ValidarCPF valida = new ValidarCPF();
+            if (!valida.isValid(txcnpj.getText())) {
+                lbErroCNPJ.setVisible(true);
+                lbErroCNPJ.setText("CPF/CNPJ inválido! Digite o CPF/CNPJ novamente");
+                txcnpj.requestFocus();
+
+            } else {
+                lbErroCNPJ.setVisible(false);
+            }
+        }
     }
 
 }

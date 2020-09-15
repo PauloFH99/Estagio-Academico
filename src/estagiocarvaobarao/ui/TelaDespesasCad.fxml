@@ -19,19 +19,10 @@
                      <children>
                         <HBox prefHeight="59.0" prefWidth="600.0">
                            <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <JFXRadioButton fx:id="rbcodigo" layoutX="14.0" onAction="#evRbCodigo" selected="true" text="Código">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="Pesquisa" />
-                                       </toggleGroup>
-                                    </JFXRadioButton>
-                                    <JFXRadioButton fx:id="rbdescricao" layoutX="14.0" layoutY="24.0" onAction="#evRbDescricao" text="Descrição" toggleGroup="$Pesquisa" />
-                                 </children>
-                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
                               <Pane prefHeight="57.0" prefWidth="501.0">
                                  <children>
-                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe a descrição  ou código...">
+                                    <JFXTextField fx:id="txpesquisar" labelFloat="true" layoutY="13.0" prefHeight="31.0" prefWidth="311.0" promptText="Informe a descrição...">
                                        <padding>
                                           <Insets right="15.0" top="15.0" />
                                        </padding>
@@ -56,9 +47,10 @@
          <center>
             <Pane fx:id="pndados" prefHeight="265.0" prefWidth="610.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" labelFloat="true" layoutX="79.0" layoutY="23.0" prefHeight="25.0" prefWidth="135.0" promptText="Código" />
                   <JFXTextField fx:id="txnome" labelFloat="true" layoutX="79.0" layoutY="89.0" prefHeight="25.0" prefWidth="260.0" promptText="Descrição *" />
-                  <JFXTextField fx:id="txdiapag" labelFloat="true" layoutX="357.0" layoutY="89.0" prefHeight="25.0" prefWidth="146.0" promptText="Dia para pagamento *" />
+                  <JFXTextField fx:id="txdiapag" labelFloat="true" layoutX="357.0" layoutY="89.0" onKeyPressed="#diavalida" prefHeight="25.0" prefWidth="146.0" promptText="Dia para pagamento *" />
+                  <Label fx:id="lberro" ellipsisString="" layoutX="357.0" layoutY="123.0" prefHeight="17.0" prefWidth="238.0" textFill="#d30808" />
                </children>
             </Pane>
          </center>

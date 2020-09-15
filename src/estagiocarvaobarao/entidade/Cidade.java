@@ -1,5 +1,8 @@
 package estagiocarvaobarao.entidade;
 
+import estagiocarvaobarao.dal.DALCidade;
+import java.util.List;
+
 public class Cidade {
 
     private int cid_cod;
@@ -52,5 +55,16 @@ public class Cidade {
     public String toString() {
         return cid_nome;
     }
-
+    public List<Cidade>get(String filtro){
+        DALCidade cid = new DALCidade();
+        return cid.get(filtro);
+    }
+    public Cidade get(int filtro){
+        DALCidade cid = new DALCidade();
+        return cid.get(filtro);
+    }
+    public Cidade get(Cidade filtro){
+        DALCidade cid = new DALCidade();
+        return cid.get(filtro.getCid_cod());
+    }
 }

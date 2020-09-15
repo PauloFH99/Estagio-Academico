@@ -1,6 +1,10 @@
 package estagiocarvaobarao.entidade;
-public class Produto
-{
+
+import estagiocarvaobarao.dal.DALProduto;
+import java.util.List;
+
+public class Produto {
+
     private int codigo;
     private int est_min;
     private int est_max;
@@ -9,7 +13,9 @@ public class Produto
     private int estoque;
     private Categoria categoria;
     private boolean ativo;
-    public Produto(int codigo, int est_min, int est_max, String descricao, double preco, int estoque,boolean ativo,Categoria categoria) {
+    private double peso;
+
+    public Produto(int codigo, int est_min, int est_max, String descricao, double preco, int estoque, boolean ativo, Categoria categoria,double peso) {
         this.codigo = codigo;
         this.est_min = est_min;
         this.est_max = est_max;
@@ -18,35 +24,37 @@ public class Produto
         this.estoque = estoque;
         this.ativo = ativo;
         this.categoria = categoria;
+        this.peso=peso;
+    }
+     public Produto(int codigo, int est_min, int est_max, String descricao, double preco, int estoque, boolean ativo, Categoria categoria) {
+        this.codigo = codigo;
+        this.est_min = est_min;
+        this.est_max = est_max;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.estoque = estoque;
+        this.ativo = ativo;
+        this.categoria = categoria;
+       
     }
 
     public Produto(int codigo) {
         this.codigo = codigo;
     }
 
-    public Produto(int codigo, String descricao, double preco) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.preco = preco;
-    }
+  
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
-    
 
-    public Produto(int est_min,int est_max,String descricao,double preco,int estoque,boolean ativo,Categoria categoria) 
-    {
-        this(0,est_min,est_max,descricao,preco,estoque,ativo,categoria);
+    public Produto(int est_min, int est_max, String descricao, double preco, int estoque, boolean ativo, Categoria categoria,double peso) {
+        this(0, est_min, est_max, descricao, preco, estoque, ativo, categoria,peso);
     }
-    
-    public Produto() 
-    {
-        this(0,0,0,"",0,0,false,null);
-    }   
 
-    
+    public Produto() {
+        this(0, 0, 0, "", 0, 0, false, null,0.0);
+    }
 
     public double getPreco() {
         return preco;
@@ -55,8 +63,6 @@ public class Produto
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
-   
 
     public Categoria getCategoria() {
         return categoria;
@@ -114,7 +120,72 @@ public class Produto
         this.estoque = estoque;
     }
 
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
     
-    
+    public boolean salvar(Produto p) {
+        DALProduto dal = new DALProduto();
+        return dal.salvar(p);
+    }
+
+    public boolean apagar(int codigo) {
+        DALProduto dal = new DALProduto();
+        return dal.apagar(codigo);
+    }
+    public boolean alterar(Produto p) {
+        DALProduto dal = new DALProduto();
+        return dal.alterar(p);
+    }
+    public boolean validaProduto(String  descricao) {
+        DALProduto dal = new DALProduto();
+        return dal.validaProduto(descricao);
+    }
+
+    public List<Produto> get(String filtro) {
+        DALProduto dal = new DALProduto();
+        return dal.get(filtro);
+    }
+
+    public List<Produto> get(Double filtro) {
+        DALProduto dal = new DALProduto();
+        return dal.get(filtro);
+    }
+
+    public List<Produto> getCategoria(String filtro) {
+        DALProduto dal = new DALProduto();
+        return dal.getCategoria(filtro);
+    }
+
+    public Produto get(int cod) {
+        DALProduto dal = new DALProduto();
+        return dal.get(cod);
+    }
+     public int getCod() {
+        DALProduto dal = new DALProduto();
+        return dal.getCod();
+    }
+
+    public boolean CampoVazio(String valor) {
+        boolean resultado = (valor.isEmpty() || valor.trim().isEmpty());
+        return resultado;
+    }
+
+    public int retornaValor(String valor) {
+        int res = 0;
+        if (!valor.equals("")) {
+            res = Integer.parseInt(valor);
+        }
+        return res;
+    }
+
+    @Override
+    public String toString() {
+        return  descricao ;
+    }
     
 }

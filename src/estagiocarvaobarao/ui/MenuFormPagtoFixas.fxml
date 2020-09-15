@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="139.0" prefWidth="1192.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.MenuFormPagtoFixasController">
+   <children>
+      <Pane prefHeight="139.0" prefWidth="1192.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;">
+         <children>
+            <Label layoutX="50.0" layoutY="14.0" prefHeight="14.0" prefWidth="158.0" text="Data vencimento *" />
+            <DatePicker fx:id="dpvenci" layoutX="50.0" layoutY="26.0" />
+            <JFXTextField fx:id="txqtdemeses" labelFloat="true" layoutX="266.0" layoutY="26.0" prefHeight="22.0" prefWidth="249.0" promptText="Quantidade de meses *" />
+            <JFXButton fx:id="btnconfirmar" layoutX="668.0" layoutY="21.0" onAction="#evtConfirmar" prefHeight="33.0" prefWidth="231.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Confirmar" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <FontAwesomeIcon fill="WHITE" iconName="CHECK" layoutX="686.0" layoutY="43.0" size="1.5em" />
+            <Pane layoutX="43.0" layoutY="82.0" prefHeight="1.0" prefWidth="1106.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+            <Pane layoutX="43.0" layoutY="108.0" prefHeight="1.0" prefWidth="1106.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+            <Label layoutX="651.0" layoutY="66.0" prefHeight="14.0" prefWidth="274.0" text="QUANTIDADE DE MESES">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="66.0" prefHeight="14.0" prefWidth="274.0" text="DATA VENCIMENTO ">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="65.0" prefHeight="14.0" prefWidth="274.0" text="FORMA DE PAGAMENTO">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbdata" layoutX="61.0" layoutY="89.0" prefHeight="14.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon fx:id="ftformpagt" iconName="MONEY" layoutX="366.0" layoutY="101.0" size="1.5em" visible="false" />
+            <Label fx:id="lbforma" layoutX="390.0" layoutY="88.0" prefHeight="14.0" prefWidth="197.0" text="DESPESAS FIXAS" visible="false">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbqtdemeses" layoutX="656.0" layoutY="88.0" prefHeight="14.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children></Pane>
+   </children>
+</VBox>

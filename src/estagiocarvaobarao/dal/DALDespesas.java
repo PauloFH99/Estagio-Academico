@@ -43,6 +43,7 @@ public class DALDespesas {
         if (!filtro.isEmpty()) {
             sql += " where " + filtro;
         }
+        sql+=" order by descricao";
         ResultSet rs = Banco.getCon().consultar(sql);
         try {
             while (rs.next()) {

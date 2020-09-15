@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="694.0" prefWidth="1103.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaPedidosCaminhaoController">
+   <children>
+      <BorderPane prefHeight="694.0" prefWidth="1103.0" style="-fx-background-color: white;">
+         <bottom>
+            <Pane prefHeight="79.0" prefWidth="1103.0" style="-fx-border-width: 1px 0px 0px 0px; -fx-border-color: #cccccc;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btncancelar" layoutX="39.0" layoutY="23.0" onAction="#evtCancelar" prefHeight="40.0" prefWidth="195.0" ripplerFill="#bc2b2b" style="-fx-background-color: #cc6666;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="TIMES" size="1.5em" wrappingWidth="38.9642858505249" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnexcuir" layoutX="264.0" layoutY="23.0" onAction="#evtExcluir" prefHeight="40.0" prefWidth="226.0" ripplerFill="#227575" style="-fx-background-color: #339999;" text="Excluir" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="TRASH" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnfinalizar" layoutX="520.0" layoutY="23.0" onAction="#evtFinalizar" prefHeight="40.0" prefWidth="226.0" ripplerFill="#227575" style="-fx-background-color: #339999;" text="Finalizar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="DOWNLOAD" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <Pane fx:id="conteudo" prefHeight="454.0" prefWidth="1103.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="536.0" prefWidth="1103.0">
+                     <children>
+                        <Pane prefHeight="337.0" prefWidth="1103.0">
+                           <children>
+                              <VBox prefHeight="260.0" prefWidth="1007.0">
+                                 <children>
+                                    <Pane prefHeight="78.0" prefWidth="1007.0">
+                                       <children>
+                                          <JFXTextField fx:id="txcod" disable="true" editable="false" layoutX="227.0" layoutY="24.0" prefHeight="25.0" prefWidth="90.0" promptText="Código" />
+                                          <DatePicker fx:id="dpinicial" layoutX="44.0" layoutY="24.0" prefHeight="17.0" prefWidth="133.0" />
+                                          <Label fx:id="lbini" layoutX="44.0" layoutY="9.0" prefHeight="17.0" prefWidth="130.0" text="Emissão da entrega*" textFill="#0a0a0a">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lberrodtini" layoutX="44.0" layoutY="49.0" prefHeight="17.0" prefWidth="189.0" textFill="#0a0a0a">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="189.0" prefWidth="1007.0" style="-fx-border-width: 1px 0px 0px 0px; -fx-border-color: #cccccc;">
+                                       <children>
+                                          <TableView fx:id="tabelaDespesa" layoutX="524.0" layoutY="41.0" prefHeight="134.0" prefWidth="333.0">
+                                            <columns>
+                                              <TableColumn fx:id="colDescDesp" prefWidth="75.0" text="Descriçao" />
+                                              <TableColumn fx:id="colValor" onEditCommit="#ediitValor" prefWidth="75.0" text="Valor" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <JFXTextField fx:id="txvalor" labelFloat="true" layoutX="50.0" layoutY="79.0" prefHeight="25.0" prefWidth="165.0" promptText="Valor *" />
+                                          <JFXTextField fx:id="txtipodes" editable="false" labelFloat="true" layoutX="247.0" layoutY="25.0" prefHeight="25.0" prefWidth="257.0" promptText="Tipo de Despesa*" />
+                                          <JFXButton fx:id="btnpesquisartipodes" layoutX="159.0" layoutY="22.0" onAction="#evtProcurarTipoDespesa" prefHeight="30.0" prefWidth="56.0">
+                                             <graphic>
+                                                <FontAwesomeIcon iconName="SEARCH" size="2em" />
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXTextField fx:id="txcoddes" labelFloat="true" layoutX="50.0" layoutY="22.0" onKeyPressed="#onExitDespesa" prefHeight="25.0" prefWidth="90.0" promptText="Cód Desp" />
+                                          <JFXComboBox fx:id="cbRota" labelFloat="true" layoutX="247.0" layoutY="78.0" prefHeight="25.0" prefWidth="176.0" promptText="Rota-Entrega" />
+                                          <JFXButton fx:id="btnadddesp" layoutX="41.0" layoutY="132.0" onAction="#evtaddDescp" prefHeight="40.0" prefWidth="195.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Incluir Despesa" textFill="WHITE">
+                                             <font>
+                                                <Font name="Consolas Bold" size="15.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIcon fill="WHITE" iconName="DOLLAR" size="1.5em" />
+                                             </graphic>
+                                          </JFXButton>
+                                          <FontAwesomeIcon fill="#999999" iconName="EDIT" layoutX="524.0" layoutY="31.0" size="1.5em" />
+                                          <Label layoutX="555.0" layoutY="8.0" prefHeight="25.0" prefWidth="212.0" text="Despesas" textFill="#999999">
+                                             <font>
+                                                <Font name="Consolas" size="21.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="355.0" prefWidth="1103.0" style="-fx-border-width: 1px 0px 0px 0px; -fx-border-color: #cccccc;">
+                           <children>
+                              <Label layoutX="75.0" layoutY="13.0" prefHeight="33.0" prefWidth="212.0" text="Entrega" textFill="#999999">
+                                 <font>
+                                    <Font name="Consolas" size="21.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIcon fill="#999999" iconName="EDIT" layoutX="44.0" layoutY="36.0" size="1.5em" />
+                              <TableView fx:id="tabelaReceber" editable="true" layoutX="44.0" layoutY="55.0" prefHeight="212.0" prefWidth="891.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="colDesc" prefWidth="89.60003817081451" text="Carvão" />
+                                    <TableColumn fx:id="colCarga" onEditCommit="#edditCarga" prefWidth="87.0" text="Carga" />
+                                    <TableColumn fx:id="colCargaVenda" onEditCommit="#edditVenda" prefWidth="98.0" text="Venda" />
+                                    <TableColumn fx:id="colRetorno" onEditCommit="#edditRetorno" prefWidth="114.0" text="Retorno" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <Pane fx:id="pnbotoes" prefHeight="58.0" prefWidth="1103.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="64.0" layoutY="25.0" prefHeight="33.0" prefWidth="212.0" text="Dados Principais" textFill="#999999">
+                     <font>
+                        <Font name="Consolas" size="21.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIcon fill="#999999" iconName="TAGS" layoutX="27.0" layoutY="48.0" size="1.5em" />
+                  <JFXButton fx:id="btnnovo" layoutX="283.0" layoutY="9.0" onAction="#evtNovo" prefHeight="40.0" prefWidth="195.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Novo" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="#fffefe" iconName="PLUS" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnpesquisar" layoutX="518.0" layoutY="9.0" onAction="#evtProcurarEntregas" prefHeight="40.0" prefWidth="195.0" ripplerFill="#fbfeff" style="-fx-background-color: #cccccc;" text="Pesquisar">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon iconName="SEARCH" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

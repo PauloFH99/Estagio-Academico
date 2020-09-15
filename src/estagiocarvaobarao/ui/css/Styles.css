@@ -39,7 +39,8 @@
     margin: 0 -40px -30px;
     padding: 15px 0 17px;
     text-align: center;
-    -fx-background-color:  #6c7a8d; 
+    -fx-background-color:  #FFFFFF; 
+     -fx-text-fill: #40B8E3;
 }
 .logar {
     margin: 0 -40px -30px;
@@ -63,6 +64,8 @@
     -fx-font-weight: normal;
     -fx-background-color:  #e44043; 
     -fx-text-fill: #FFFFFF;
+      outline-style: none;
+
 }
 .sair:hover{
     -fx-background-color:  #db4a37;
@@ -97,15 +100,17 @@
 
 .menubar{
     -fx-font-size: 14;
-    -fx-base : rgb(58,69,88);
+/*    -fx-base : rgb(200, 207, 219);*/
     -fx-background-color: #343e43;
-     -fx-text-fill: #eef1f5;
+     -fx-fill: black;
 }
 
 .conteudomenubar {
     -fx-background-color:  #0099ff;
     -fx-font-size: 14;
     -fx-min-width: 150px;
+    -fx-fill: black;
+    
 }
 
 

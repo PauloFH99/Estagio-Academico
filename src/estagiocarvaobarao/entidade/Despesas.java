@@ -5,14 +5,21 @@
  */
 package estagiocarvaobarao.entidade;
 
+import estagiocarvaobarao.dal.DALDespesas;
+import java.util.List;
+
 /**
  *
  * @author Paulo
  */
 public class Despesas {
+
     private int codigo;
     private String descricao;
     private int dia_pagar;
+
+    public Despesas() {
+    }
 
     public Despesas(int codigo, String descricao, int dia_pagar) {
         this.codigo = codigo;
@@ -55,7 +62,32 @@ public class Despesas {
 
     @Override
     public String toString() {
-        return  descricao;
+        return descricao;
     }
-    
+
+    public boolean salvar(Despesas d) {
+        DALDespesas dal = new DALDespesas();
+        return dal.salvar(d);
+    }
+
+    public boolean alterar(Despesas d) {
+        DALDespesas dal = new DALDespesas();
+        return dal.alterar(d);
+    }
+
+    public boolean apagar(int cod) {
+        DALDespesas dal = new DALDespesas();
+        return dal.apagar(cod);
+    }
+
+    public List<Despesas> get(String filtro) {
+        DALDespesas dal = new DALDespesas();
+        return dal.get(filtro);
+    }
+
+    public Despesas get(int cod) {
+        DALDespesas dal = new DALDespesas();
+        return dal.get(cod);
+    }
+
 }

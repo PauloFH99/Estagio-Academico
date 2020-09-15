@@ -9,7 +9,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -18,35 +17,119 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" styleClass="tabCor" stylesheets="@css/stylehseet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="tabCor" stylesheets="@css/stylehseet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaInicialController">
    <children>
-      <BorderPane fx:id="tela" layoutY="-1.0" maxWidth="990.0" prefHeight="1440.0">
+      <BorderPane fx:id="tela" layoutY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
          <top>
-            <Pane prefHeight="36.0" prefWidth="1440.0" styleClass="menubar" BorderPane.alignment="CENTER">
+            <Pane prefHeight="36.0" styleClass="menubar" BorderPane.alignment="CENTER">
                <children>
-                  <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="50.0" prefWidth="1440.0" styleClass="menubar" stylesheets="@css/Styles.css">
+                  <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="41.0" prefWidth="2230.0" styleClass="menubar" stylesheets="@css/Styles.css">
                     <menus>
-                      <Menu mnemonicParsing="false" text="Cadastro">
+                      <Menu fx:id="menuCad" mnemonicParsing="false" text="Cadastro">
                         <items>
                               <MenuItem mnemonicParsing="false" onAction="#clkCadCategorias" text="Categorias" />
                               <MenuItem mnemonicParsing="false" onAction="#clkCadCliente" text="Cliente" />
-                              <MenuItem mnemonicParsing="false" onAction="#clkCadDespesas" text="Despesas" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadDespesas" text="Tipos de Despesas" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadEmpresa" text="Empresa" />
                               <MenuItem mnemonicParsing="false" onAction="#clkCadFornecedor" text="Fornecedores" />
-                              <MenuItem mnemonicParsing="false" onAction="#clkCadFuncionario" text="Funcionarios" />
-                              <MenuItem mnemonicParsing="false" onAction="#clkCadNivelFuncionarios" text="NivelFuncioanrios" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadFuncionario" text="Funcionários" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadNivelFuncionarios" text="Nível de Funcionário " />
                           <MenuItem mnemonicParsing="false" onAction="#clkCadProduto" text="Produtos" />
-                              <MenuItem mnemonicParsing="false" text="Close" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadCustoFornecedor" text="Tabela Custos por Fornecedor" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCadCustoCliente" text="Tabela Custos por Cliente" />
                         </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="USER" size="1.5em" />
+                           </graphic>
                       </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
+                        <Menu fx:id="menuCompra" mnemonicParsing="false" text="Compra">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkCompra" text="Compra" />
+                           </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="MONEY" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                      <Menu fx:id="menuEstoque" mnemonicParsing="false" text="Estoque">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
+                          <MenuItem mnemonicParsing="false" onAction="#clkAcertoEstoque" text="Acerto de Estoque" />
                         </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="BAR_CHART" size="1.5em" />
+                           </graphic>
                       </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
+                        <Menu fx:id="menuFluxoCaixa" mnemonicParsing="false" text="Fluxo de Caixa">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkContasaPagar" text="Contas a Pagar" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkCompensarCheque" text="Compensar Cheque" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkLançarDespesas" text="Lançar Despesas" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkReceberFiado" text="Receber Fiado" />
+                           </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="DOLLAR" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                        <Menu fx:id="menuProducao1" mnemonicParsing="false" text="Pedidos">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkPedidos" text="Consulta Pedidos" />
+                              <MenuItem mnemonicParsing="false" onAction="#clkPedidosCaminhao" text="Pedidos Caminhão" />
+                           </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="LIST_ALT" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                        <Menu fx:id="menuProducao" mnemonicParsing="false" text="Produçao">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkProducao" text="Produçao" />
+                           </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="CUBES" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                        <Menu fx:id="menuVenda1" mnemonicParsing="false" text="Estoque Aux">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clkEstoqueaux" text="Estoque" />
+                           </items>
+                        </Menu>
+                        <Menu fx:id="menuVenda" mnemonicParsing="false" text="Venda">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#clkVenda" text="Venda" />
+                          </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="SHOPPING_CART" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                        <Menu fx:id="MenuRelatorio" mnemonicParsing="false" text="Relatórios">
+                           <items>
+                              <Menu mnemonicParsing="false" text="Relatórios Básicos">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#relProdutos" text="Relatório de Produtos" />
+                                    <MenuItem mnemonicParsing="false" onAction="#relClientes" text="Relatório de Clientes" />
+                                </items>
+                              </Menu>
+                              <Menu mnemonicParsing="false" text="Relatórios Financeiros">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#relCompras" text="Relatório de Compras" />
+                                    <MenuItem mnemonicParsing="false" onAction="#relCheques" text="Relatório de Cheques Emitidos" />
+                                    <MenuItem mnemonicParsing="false" onAction="#relVendas" text="Relatório de Vendas" />
+                                 </items>
+                              </Menu>
+                           </items>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="LIST" size="1.5em" />
+                           </graphic>
+                        </Menu>
+                      <Menu mnemonicParsing="false">
+                           <graphic>
+                              <JFXButton fx:id="btnsair" alignment="TOP_CENTER" onAction="#SairT" prefHeight="23.0" prefWidth="111.0" stylesheets="@css/Styles.css" text="Sair" textAlignment="CENTER" textFill="#eef1f5">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" iconName="SIGN_OUT" size="1.5em" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </graphic>
                       </Menu>
                     </menus>
                   </MenuBar>
@@ -54,15 +137,15 @@
             </Pane>
          </top>
          <center>
-            <VBox prefHeight="1055.0" prefWidth="740.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="1055.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="72.0" prefWidth="740.0">
+                  <HBox prefHeight="72.0" prefWidth="1464.0">
                      <children>
-                        <HBox fx:id="menubar" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="1440.0" style="-fx-background-color: #fff; -fx-border-color: #cccccc; -fx-border-width: 0px 0px 1px 0px;" stylesheets="@../../../../../../Downloads/Flat%20Dashboard%202/Flat%20Dashboard/src/app/css/stylehseet.css">
+                        <HBox fx:id="menubar" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="1980.0" style="-fx-background-color: #fff; -fx-border-color: #cccccc; -fx-border-width: 0px 0px 1px 0px;" stylesheets="@../../../../../../Downloads/Flat%20Dashboard%202/Flat%20Dashboard/src/app/css/stylehseet.css">
                            <children>
-                              <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#abrir_menulateral" prefHeight="50.0" prefWidth="50.0" ripplerFill="WHITE" styleClass="menu-bar-btns">
+                              <JFXButton alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#abrir_menulateral" prefHeight="50.0" prefWidth="50.0" ripplerFill="WHITE" styleClass="menu-bar-btns" visible="false">
                                  <graphic>
-                                    <FontAwesomeIcon iconName="TH_LIST" size="2em" styleClass="menu-bar-btns-icon" text="" />
+                                    <FontAwesomeIcon iconName="TH_LIST" size="2em" styleClass="menu-bar-btns-icon" />
                                  </graphic>
                               </JFXButton>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" styleClass="menu-bar-search-field-box" HBox.hgrow="ALWAYS">
@@ -73,15 +156,222 @@
                                     <Insets />
                                  </HBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="680.0" HBox.hgrow="ALWAYS" />
+                              <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox prefHeight="1332.0" prefWidth="740.0" />
+                  <HBox prefHeight="1332.0" prefWidth="740.0">
+                     <children>
+                        <ScrollPane fx:id="painelcentral" prefHeight="1000.0" prefWidth="1973.0">
+                          <content>
+                            <AnchorPane fx:id="logoinit" minHeight="0.0" minWidth="0.0" prefHeight="998.0" prefWidth="1973.0">
+                                 <children>
+                                    <Label fx:id="lbHome" layoutX="49.0" layoutY="6.0" prefHeight="84.0" prefWidth="1814.0" text="Bem Vindo ao " textFill="#170000">
+                                       <font>
+                                          <Font size="57.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="logoCarvao" fitHeight="466.0" fitWidth="994.0" layoutX="234.0" layoutY="106.0" pickOnBounds="true" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children></HBox>
                </children>
             </VBox>
          </center>
+         <bottom>
+            <Pane prefHeight="89.0" prefWidth="2230.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="424.0" layoutY="23.0" prefHeight="43.0" prefWidth="1267.0" text="© Copyright 2020 Paulo Henrique Fernandes dos Santos - Todos os direitos reservados">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </bottom>
+         <left>
+            <VBox fx:id="sidebar" alignment="TOP_CENTER" prefHeight="580.0" prefWidth="250.0" styleClass="sidebar" stylesheets="@css/stylehseet.css" visible="false" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton contentDisplay="RIGHT" ripplerFill="#e4dddd" styleClass="sidebar-user-btn">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" text="Principal" textFill="#b8b1b1">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#home" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="PAGINA INICIAL" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="CONTROLE DE VENDAS" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="lancD" alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#lancarDesp" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="BRIEFCASE" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="LANÇAR DESPESAS" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="TASKS" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="LISTA DE PRODUTOS" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="197.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="CALENDAR" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="CALENDER" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <Label layoutX="10.0" layoutY="137.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" text="Usúario" textFill="#b8b1b1">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="USERS" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="LISTA DE FUNCIONÁRIOS" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="199.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="TRUCK" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="LISTA DE FORNECEDORES" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="USER" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="CONFIGURAÇÕES DO USÚARIO" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#Sair" prefHeight="35.0" prefWidth="250.0" styleClass="sidebar-btn">
+                     <children>
+                        <FontAwesomeIcon iconName="SIGN_OUT" size="1.5em" styleClass="sidebar-btn-icon" />
+                        <Label text="SAIR" textFill="#b8b1b1">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

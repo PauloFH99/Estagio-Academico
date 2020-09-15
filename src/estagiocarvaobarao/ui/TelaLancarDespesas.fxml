@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1135.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaLancarDespesasController">
+   <children>
+      <BorderPane fx:id="tela" layoutY="-2.0" prefHeight="675.0" prefWidth="1135.0">
+         <top>
+            <VBox prefHeight="469.0" prefWidth="1192.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="71.0" prefWidth="1192.0">
+                     <children>
+                        <Pane fx:id="pnnovo" prefHeight="100.0" prefWidth="875.0" style="-fx-background-color: #fff; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;">
+                           <children>
+                              <JFXButton fx:id="btnnovo" layoutX="38.0" layoutY="8.0" onAction="#evtNovo" prefHeight="33.0" prefWidth="195.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Novo" textFill="WHITE">
+                                 <font>
+                                    <Font name="Consolas Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon fill="#fffefe" iconName="PLUS" size="1.5em" />
+                                 </graphic>
+                              </JFXButton>
+                              <FontAwesomeIcon fill="#999999" iconName="TAGS" layoutX="38.0" layoutY="66.0" size="1.5em" />
+                              <Label layoutX="69.0" layoutY="44.0" prefHeight="33.0" prefWidth="212.0" text="Dados Principais" textFill="#999999">
+                                 <font>
+                                    <Font name="Consolas" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pnpesquisa" prefHeight="99.0" prefWidth="573.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;">
+                           <children>
+                              <JFXButton fx:id="btnpesquisar" layoutX="38.0" layoutY="8.0" onAction="#evtProcurarDespesas" prefHeight="38.0" prefWidth="281.0" ripplerFill="#fbfeff" style="-fx-background-color: #cccccc;" text="Pesquisar">
+                                 <font>
+                                    <Font name="Consolas Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon iconName="SEARCH" size="1.5em" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Pane fx:id="pnconteudo" prefHeight="191.0" prefWidth="1192.0">
+                     <children>
+                        <DatePicker fx:id="dpemissao" layoutX="200.0" layoutY="34.0" />
+                        <JFXTextField fx:id="txcod" disable="true" editable="false" layoutX="61.0" layoutY="32.0" prefHeight="25.0" prefWidth="90.0" promptText="Código" />
+                        <JFXTextField fx:id="txcoddes" labelFloat="true" layoutX="61.0" layoutY="95.0" onKeyPressed="#onExitDespesa" prefHeight="25.0" prefWidth="62.0" promptText="Código" />
+                        <JFXButton fx:id="btnpesquisartipodes" layoutX="143.0" layoutY="92.0" onAction="#evtProcurarTipoDespesa" prefHeight="30.0" prefWidth="56.0">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SEARCH" size="2em" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXTextField fx:id="txtipodes" labelFloat="true" layoutX="218.0" layoutY="94.0" prefHeight="25.0" prefWidth="313.0" promptText="Tipo de Despesa*" />
+                        <JFXTextField fx:id="txvalor" labelFloat="true" layoutX="596.0" layoutY="96.0" prefHeight="22.0" prefWidth="305.0" promptText="Valor *" />
+                        <Label fx:id="lbvalor" layoutX="61.0" layoutY="243.0" prefHeight="17.0" prefWidth="218.0" textFill="#f10404" />
+                        <Label layoutX="82.0" layoutY="158.0" prefHeight="33.0" prefWidth="212.0" text="Forma de Pagamento" textFill="#999999">
+                           <font>
+                              <Font name="Consolas" size="20.0" />
+                           </font>
+                        </Label>
+                        <FontAwesomeIcon fill="#999999" iconName="TAGS" layoutX="49.0" layoutY="183.0" size="2em" text="" />
+                        <Label layoutX="199.0" layoutY="14.0" prefHeight="17.0" prefWidth="176.0" text="Emissão" />
+                        <Label fx:id="lberroemissao" ellipsisString="" layoutX="201.0" layoutY="62.0" prefHeight="17.0" prefWidth="197.0" textFill="#e10a0a" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pnformapgto" prefHeight="175.0" prefWidth="1192.0" style="-fx-border-width: 1px 0px 0px 0px; -fx-border-color: #cccccc;">
+                     <children>
+                        <JFXButton fx:id="btnparcelas" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="896.0" layoutY="34.0" onAction="#gerarParcelas" prefHeight="47.0" prefWidth="140.0" ripplerFill="#fbfeff" style="-fx-background-color: #66cc66;" text="Confirmar" textAlignment="CENTER" textFill="#fff6f6">
+                           <font>
+                              <Font name="Consolas Bold" size="16.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="#fffafa" iconName="CHECK" size="1.5em" />
+                           </graphic>
+                        </JFXButton>
+                        <Label fx:id="lbdatatexto" layoutX="74.0" layoutY="108.0" prefHeight="16.0" prefWidth="189.0" text="DATA  1° VENCIMENTO ">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbqtdeparctexto" layoutX="535.0" layoutY="108.0" prefHeight="14.0" prefWidth="197.0" text="QUANTIDADE DE PARCELAS">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbformapagtotexto" layoutX="281.0" layoutY="108.0" prefHeight="14.0" prefWidth="274.0" text="FORMA DE PAGAMENTO">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="pnlinhatop" layoutX="66.0" layoutY="134.0" prefHeight="0.0" prefWidth="1029.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+                        <Pane fx:id="pnlinhadown" layoutX="67.0" layoutY="160.0" prefHeight="2.0" prefWidth="1030.0" style="-fx-border-width: 0px 0 px 1px 0px; -fx-border-color: #cccccc;" />
+                        <Label fx:id="lbdata" layoutX="66.0" layoutY="143.0" prefHeight="14.0" prefWidth="197.0">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <FontAwesomeIcon fx:id="ftformpagt" iconName="CREDIT_CARD" layoutX="281.0" layoutY="155.0" size="1.5em" visible="false" />
+                        <Label fx:id="lbforma" layoutX="323.0" layoutY="142.0" prefHeight="16.0" prefWidth="179.0" text="CARTÃO DE CRÉDITO" visible="false">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbqtdeparc" layoutX="535.0" layoutY="142.0" prefHeight="14.0" prefWidth="197.0">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lberro1venc" ellipsisString="" layoutX="42.0" layoutY="62.0" prefHeight="17.0" prefWidth="197.0" textFill="#e10a0a" />
+                        <Label layoutX="42.0" layoutY="14.0" prefHeight="17.0" prefWidth="176.0" text="Data 1° Venc" />
+                        <JFXComboBox fx:id="cbFormaPagto" labelFloat="true" layoutX="250.0" layoutY="33.0" onAction="#pegarForma" prefHeight="31.0" prefWidth="199.0" promptText="Forma de Pagamento" />
+                        <DatePicker fx:id="dpdatavencimento" layoutX="40.0" layoutY="35.0" prefHeight="31.0" prefWidth="180.0" />
+                        <Label fx:id="lberroentredias" ellipsisString="" layoutX="687.0" layoutY="65.0" prefHeight="17.0" prefWidth="197.0" textFill="#e10a0a" />
+                        <Label fx:id="lberroqtdeparc" ellipsisString="" layoutX="473.0" layoutY="65.0" prefHeight="17.0" prefWidth="197.0" textFill="#e10a0a" />
+                        <JFXTextField fx:id="txdiasentreparc" labelFloat="true" layoutX="686.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" promptText="Dias entre Parcelas" />
+                        <JFXTextField fx:id="txqtdeparc" labelFloat="true" layoutX="473.0" layoutY="34.0" prefHeight="31.0" prefWidth="190.0" promptText="Quantidade de Parcela" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </top>
+         <bottom>
+            <VBox prefHeight="61.0" prefWidth="1135.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="pnbotoes" prefHeight="163.0" prefWidth="1135.0">
+                     <children>
+                        <JFXButton fx:id="btncancelar" layoutX="26.0" layoutY="18.0" onAction="#evtCancelar" prefHeight="33.0" prefWidth="195.0" ripplerFill="#bc2b2b" style="-fx-background-color: #cc6666;" text="Cancelar" textFill="WHITE">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="TIMES" size="1.5em" wrappingWidth="38.9642858505249" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnexcluir" layoutX="334.0" layoutY="18.0" onAction="#evtExcluir" prefHeight="33.0" prefWidth="195.0" ripplerFill="#024d72" style="-fx-background-color: #006699;" text="Excluir" textFill="WHITE">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="TRASH" size="1.5em" wrappingWidth="12.96429443359375" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnfinalizar" layoutX="652.0" layoutY="18.0" onAction="#evtFinalizar" prefHeight="33.0" prefWidth="218.0" ripplerFill="#227575" style="-fx-background-color: #339999;" text="Finalizar Lançamento" textFill="WHITE">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" iconName="DOWNLOAD" size="1.5em" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </bottom>
+         <center>
+            <Pane fx:id="tabelapane" prefHeight="110.0" prefWidth="1135.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView id="tabela" fx:id="tabela" editable="true" layoutX="65.0" layoutY="5.0" prefHeight="135.0" prefWidth="1049.0">
+                     <columns>
+                        <TableColumn fx:id="colEmissao" onEditCommit="#editEmissao" prefWidth="146.0" text="Emissão" />
+                        <TableColumn fx:id="colParcela" prefWidth="67.0" text="Parcelas" />
+                        <TableColumn fx:id="colValor" onEditCommit="#editValor" prefWidth="132.0" text="Valor" />
+                        <TableColumn fx:id="colVencimento" onEditCommit="#editVencimento" prefWidth="137.0" text="Data de vencimento" />
+                        <TableColumn fx:id="colDataPago" minWidth="0.0" onEditCommit="#editDataPago" prefWidth="165.0" text="Data pago" />
+                        <TableColumn fx:id="colValorPago" minWidth="0.0" onEditCommit="#editValorPago" prefWidth="212.0" text="Valor pago" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children></Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

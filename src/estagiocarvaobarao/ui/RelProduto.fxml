@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.testapps.*?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.RelProdutoController">
+   <children>
+      <Label layoutX="73.0" layoutY="36.0" text="RELATÓRIO DE PRODUTOS">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Pane layoutX="21.0" layoutY="110.0" prefHeight="267.0" prefWidth="548.0" style="-fx-border-width: 1px 1px 1px 1px; -fx-background-color: #fff; -fx-border-color: #cccccc;">
+         <children>
+            <Label layoutX="31.0" layoutY="26.0" prefHeight="51.0" prefWidth="410.0" text="FILTROS">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon iconName="FILTER" layoutX="167.0" layoutY="60.0" size="2em" />
+            <CheckBox fx:id="chkativo" layoutX="31.0" layoutY="100.0" mnemonicParsing="false" selected="true" text="Ativo">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </CheckBox>
+            <JFXButton fx:id="btngerarel" contentDisplay="RIGHT" layoutX="31.0" layoutY="193.0" onAction="#gerar" prefHeight="45.0" prefWidth="486.0" style="-fx-border-color: black; -fx-border-width: 1px 1px 1px 1px;" text="GERAR RELATÓRIO" textFill="#212325">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="BAR_CHART" size="2em" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

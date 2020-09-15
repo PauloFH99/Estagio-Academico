@@ -5,6 +5,9 @@
  */
 package estagiocarvaobarao.entidade;
 
+import estagiocarvaobarao.dal.DALFornecedor;
+import java.util.List;
+
 /**
  *
  * @author Paulo
@@ -14,7 +17,7 @@ public class Fornecedor {
     private int codigo;
     private String nomefantasia;
     private String cnpj;
-    private boolean ativo;
+    private String ativo;
     private String logradouro;
     private String bairro;
     private String numero;
@@ -25,11 +28,12 @@ public class Fornecedor {
     private String email;
     private String telefone;
     private String razaosocial;
+    private Categoria categoria;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(int codigo, String nomefantasia, String cnpj, boolean ativo, String logradouro, String bairro, String numero, Cidade cidade, String cep, String nomecontato, String telefonecontato, String email, String telefone, String razaosocial) {
+    public Fornecedor(int codigo, String nomefantasia, String cnpj, String ativo, String logradouro, String bairro, String numero, Cidade cidade, String cep, String nomecontato, String telefonecontato, String email, String telefone, String razaosocial) {
         this.codigo = codigo;
         this.nomefantasia = nomefantasia;
         this.cnpj = cnpj;
@@ -54,7 +58,7 @@ public class Fornecedor {
         this.razaosocial = razaosocial;
     }
 
-    public Fornecedor(String nomefantasia, String cnpj, boolean ativo, String logradouro, String bairro, String numero, Cidade cidade, String cep, String nomecontato, String telefonecontato, String email, String telefone, String razaosocial) {
+    public Fornecedor(String nomefantasia, String cnpj, String ativo, String logradouro, String bairro, String numero, Cidade cidade, String cep, String nomecontato, String telefonecontato, String email, String telefone, String razaosocial) {
         this.nomefantasia = nomefantasia;
         this.cnpj = cnpj;
         this.ativo = ativo;
@@ -69,6 +73,27 @@ public class Fornecedor {
         this.telefone = telefone;
         this.razaosocial = razaosocial;
     }
+
+    public Fornecedor(int codigo, String nomefantasia, String cnpj, String ativo, String logradouro, String bairro, 
+            String numero, Cidade cidade, String cep, String nomecontato, String telefonecontato, String email,
+            String telefone, String razaosocial, Categoria categoria) {
+        this.codigo = codigo;
+        this.nomefantasia = nomefantasia;
+        this.cnpj = cnpj;
+        this.ativo = ativo;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.nomecontato = nomecontato;
+        this.telefonecontato = telefonecontato;
+        this.email = email;
+        this.telefone = telefone;
+        this.razaosocial = razaosocial;
+        this.categoria = categoria;
+    }
+    
 
     public Fornecedor(int codigo) {
         this.codigo = codigo;
@@ -94,15 +119,23 @@ public class Fornecedor {
         return cnpj;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    public boolean isAtivo() {
+    public String isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
 
@@ -183,4 +216,33 @@ public class Fornecedor {
         return nomefantasia;
     }
 
+    public boolean salvar(Fornecedor f) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.salvar(f);
+    }
+
+    public boolean alterar(Fornecedor f) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.alterar(f);
+    }
+
+    public boolean apagar(int cod) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.apagar(cod);
+    }
+
+    public Fornecedor get(int cod) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.get(cod);
+    }
+
+    public Fornecedor getF(String cod) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.getF(cod);
+    }
+
+    public List<Fornecedor> get(String filtro) {
+        DALFornecedor dal = new DALFornecedor();
+        return dal.get(filtro);
+    }
 }

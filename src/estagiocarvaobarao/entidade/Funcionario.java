@@ -1,7 +1,10 @@
-
 package estagiocarvaobarao.entidade;
 
+import estagiocarvaobarao.dal.DALFuncionario;
+import java.util.List;
+
 public class Funcionario {
+
     private int codigo;
     private String nome;
     private String cpf;
@@ -43,14 +46,6 @@ public class Funcionario {
         this.cep = cep;
     }
 
-    @Override
-    public String toString() {
-        return  nome ;
-    }
-
-    
-    
-    
     public Funcionario(int codigo, String nome, String cpf, String ativo, NivelFuncionario nivel) {
         this.codigo = codigo;
         this.nome = nome;
@@ -72,14 +67,10 @@ public class Funcionario {
         this.nivel = nivel;
     }
 
-
     public Funcionario(int codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
     }
-
-    
-
 
     public int getCodigo() {
         return codigo;
@@ -199,5 +190,48 @@ public class Funcionario {
 
     public void setCep(String cep) {
         this.cep = cep;
-    }  
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+    public boolean salvar(Funcionario f) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.salvar(f);
+    }
+
+    public boolean alterar(Funcionario f) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.alterar(f);
+    }
+
+    public boolean apagar(int cod) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.apagar(cod);
+    }
+
+    public Funcionario get(int cod) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.get(cod);
+    }
+    public List<Funcionario> get(String filtro) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.get(filtro);
+    }
+    public List<Funcionario> getAux(int cod) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.getAux(cod);
+    }
+    
+    public Funcionario getLoginF(String usuario,String senha) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.getLogin(usuario, senha);
+    }
+    public Funcionario getloginF(String usuario) {
+        DALFuncionario dal = new DALFuncionario();
+        return dal.getLogin(usuario);
+    }
+    
 }

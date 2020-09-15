@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,11 +23,11 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import estagiocarvaobarao.EstagioCarvaoBarao;
+import estagiocarvaobarao.controller.ControllerCategoria;
 import estagiocarvaobarao.dal.DALCategoria;
 import estagiocarvaobarao.entidade.Categoria;
-import static estagiocarvaobarao.ui.TelaFornecedorCadController.cid;
 import estagiocarvaobarao.utils.MaskFieldUtil;
-import estagiocarvaobarao.utils.Messages;
+import estagiocarvaobarao.utils.Mensagens;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -84,14 +85,10 @@ public class TelaCategoriaCadController implements Initializable {
 
     private JFXComboBox<Categoria> cbnivel;
 
-    @FXML
-    private JFXRadioButton rbcodigo;
-    @FXML
-    private ToggleGroup Pesquisa;
-    @FXML
-    private JFXRadioButton rbdescricao;
+   
     @FXML
     private TableColumn<Categoria, String> coldesc;
+    ControllerCategoria catcontro = new ControllerCategoria();
 
     /**
      * Initializes the controller class.
@@ -103,78 +100,53 @@ public class TelaCategoriaCadController implements Initializable {
         colcod.setCellValueFactory(new PropertyValueFactory("codigo"));
         coldesc.setCellValueFactory(new PropertyValueFactory("descricao"));
 
-        estadoInicial();
+        catcontro.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome, tabela);
     }
 
     private void estadoInicial() {
-        pnpesquisa.setDisable(false);
-        pndados.setDisable(true);
-        btconfirmar.setDisable(true);
-        btcancelar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        btnovo.setDisable(false);
-        ObservableList<Node> componentes = pndados.getChildren();//”limpa” os componentes
-        for (Node n : componentes) {
-            if (n instanceof TextInputControl)//textfield, textarea e htmleditor
-            {
-                ((TextInputControl) n).setText("");
-            }
-            if (n instanceof ComboBox) {
-                ((ComboBox) n).getSelectionModel().select(0);
-            }
-        }
-
-        carregaTabela("");
+        catcontro.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome, tabela);
     }
 
-    private int carregaTabela(String filtro) {
-        DALCategoria dal = new DALCategoria();
-        List<Categoria> res = dal.get(filtro);
-        ObservableList<Categoria> modelo;
-        modelo = FXCollections.observableArrayList(res);
-        tabela.setItems(modelo);
-        return res.size();
+    private void carregaTabela(String filtro) {
+
+        catcontro.carregaTabela(tabela, filtro);
     }
 
     private void estadoEdicao() {
+        catcontro.estadoEdicao(pnpesquisa, pndados, btconfirmar, btapagar, btalterar, txnome,txpesquisar);
 
-        pnpesquisa.setDisable(true);
-        pndados.setDisable(false);
-        btconfirmar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        txnome.requestFocus();
     }
 
     @FXML
     private void clknovo(ActionEvent event) {
-        estadoEdicao();
+        catcontro.estadoEdicao(pnpesquisa, pndados, btconfirmar, btapagar, btalterar, txnome,txpesquisar);
     }
 
     @FXML
     private void clkalterar(ActionEvent event) {
-        estadoEdicao();
-        DALCategoria dal = new DALCategoria();
-        
-        Categoria c = (Categoria) tabela.getSelectionModel().getSelectedItem();
-        
-        txcod.setText("" + c.getCodigo());
-        txnome.setText("" + c.getDescricao());
+        catcontro.estadoEdicao(pnpesquisa, pndados, btconfirmar, btapagar, btalterar, txnome,txpesquisar);
+        catcontro.alterar(tabela, txcod, txnome);
 
     }
 
     @FXML
     private void clkapagar(ActionEvent event) {
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setContentText("Confirma a exclusão");
-        if (a.showAndWait().get() == ButtonType.OK) {
-            DALCategoria dal = new DALCategoria();
-            Categoria c;
-            c = tabela.getSelectionModel().getSelectedItem();
-            dal.apagar(c.getCodigo());
-            carregaTabela("");
-        }
+        catcontro.excluir(tabela);
+
     }
 
     private boolean CampoVazio(String valor) {
@@ -190,62 +162,44 @@ public class TelaCategoriaCadController implements Initializable {
         return res;
     }
 
+    public void validar(JFXTextField campo, String texto) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        campo.resetValidation();
+        campo.getValidators().add(validator);
+        validator.setMessage(texto);
+        campo.validate();
+    }
+
     @FXML
     private void clkconfirmar(ActionEvent event) {
 
         int cod, erro = 0;
-        Categoria c;
-        DALCategoria dal = new DALCategoria();
-
-        Messages msg = new Messages();
+ 
+        Mensagens msg = new Mensagens();
         try {
             cod = Integer.parseInt(txcod.getText());
         } catch (Exception e) {
             cod = 0;
         }
-
-        if (erro == 0) {
-
-            c = new Categoria(cod, txnome.getText());
-
-            if (c.getCodigo() == 0) {
-                if (dal.salvar(c)) {
-                    msg.Confirmation("Gravação concluida", "Gravado com Sucesso");
-                } else {
-                    msg.Error("Erro ao gravar!", "Problemas ao Gravar");
-                }
-            } else if (dal.alterar(c)) {
-                msg.Confirmation("Gravação concluida", "Alterado com Sucesso");
-            } else {
-                msg.Error("Erro ao alterar!", "Problemas ao Alterar");
-            }
-            estadoInicial();
+        if (txnome.getText().isEmpty()) {
+            validar(txnome, "Campo não estar vazio!");
+            erro = 1;
+        }
+        if (erro == 0) {     
+            catcontro.confirmar(cod, pnpesquisa, pndados, btconfirmar, btcancelar, btapagar, btalterar, btnovo, txnome, tabela);
         }
     }
 
     @FXML
     private void clkcancelar(ActionEvent event) {
-        if (!pndados.isDisabled())//encontra em estado de edição
-        {
-            estadoInicial();
-        } else {
-            btnovo.getScene().getWindow().hide();//fecha a janela
-        }
+        catcontro.cancelar(pnpesquisa, pndados, btconfirmar, btcancelar, btapagar, btnovo, btalterar, txnome, tabela);
+
     }
 
     @FXML
     private void clkPesquisar(ActionEvent event) {
-        if (!txpesquisar.getText().isEmpty()) {
-            if (rbdescricao.isSelected()) {
-                carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-            } else {
-                if (rbcodigo.isSelected()) {
-                    carregaTabela("codigo=" + txpesquisar.getText().toUpperCase());
-                }
-            }
-        } else {
-            carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-        }
+        catcontro.pesquisar(txpesquisar, tabela);
+
     }
 
     @FXML
@@ -257,13 +211,10 @@ public class TelaCategoriaCadController implements Initializable {
     }
 
     @FXML
-    private void evRbCodigo(ActionEvent event) {
+    private void evRbCodigo(MouseEvent event) {
     }
 
-    @FXML
-    private void evRbDescricao(ActionEvent event) {
-    }
 
-   
+  
 
 }

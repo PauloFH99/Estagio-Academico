@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="635.0" prefWidth="611.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.ui.TelaAcertoEstoqueController">
+   <children>
+      <VBox prefHeight="635.0" prefWidth="611.0" style="-fx-background-color: #ffff;">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane fx:id="pnnovo" prefHeight="100.0" prefWidth="875.0" style="-fx-background-color: #fff; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;">
+                     <children>
+                        <JFXButton fx:id="btnnovo" layoutX="38.0" layoutY="13.0" onAction="#evtNovo" prefHeight="33.0" prefWidth="195.0" ripplerFill="#0a6533" style="-fx-background-color: #339966;" text="Novo" textFill="WHITE">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <FontAwesomeIcon fill="#fffefe" iconName="PLUS" layoutX="56.0" layoutY="37.0" size="1.5em" />
+                        <Label layoutX="69.0" layoutY="64.0" prefHeight="33.0" prefWidth="212.0" text="Dados Principais" textFill="#999999">
+                           <font>
+                              <Font name="Consolas" size="20.0" />
+                           </font>
+                        </Label>
+                        <FontAwesomeIcon fill="#999999" iconName="TAGS" layoutX="38.0" layoutY="88.0" size="2em" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pnpesquisa" prefHeight="92.0" prefWidth="756.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;">
+                     <children>
+                        <JFXButton fx:id="btnpesquisar" layoutX="33.0" layoutY="9.0" onAction="#evtProcurarAcertos" prefHeight="69.0" prefWidth="195.0" ripplerFill="#fbfeff" style="-fx-background-color: #cccccc;" text="Pesquisar">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon iconName="SEARCH" size="4em" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Pane fx:id="pnconteudo" prefHeight="462.0" prefWidth="697.0">
+               <children>
+                  <DatePicker fx:id="dpemissao" layoutX="61.0" layoutY="31.0" />
+                  <JFXTextField fx:id="txcod" disable="true" editable="false" layoutX="425.0" layoutY="31.0" prefHeight="25.0" prefWidth="90.0" promptText="Código" />
+                  <JFXRadioButton fx:id="rbarmazem" layoutX="56.0" layoutY="173.0" selected="true" text="Estoque Armazém">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="estoque" />
+                     </toggleGroup></JFXRadioButton>
+                  <JFXRadioButton fx:id="rbentrada" layoutX="310.0" layoutY="173.0" selected="true" text="Entrada">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Entrada" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="rbsaida" layoutX="310.0" layoutY="215.0" text="Saída" toggleGroup="$Entrada" />
+                  <JFXTextField fx:id="txcodprod" labelFloat="true" layoutX="61.0" layoutY="101.0" onKeyPressed="#onExitProduto" prefHeight="25.0" prefWidth="80.0" promptText="Códi Produto" />
+                  <JFXButton fx:id="btnpesquisarprod" ellipsisString="" layoutX="154.0" layoutY="98.0" onAction="#evtProcurarProduto" prefHeight="32.0" prefWidth="35.0">
+                     <graphic>
+                        <FontAwesomeIcon iconName="SEARCH" size="2em" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXTextField fx:id="txprod" disable="true" editable="false" labelFloat="true" layoutX="215.0" layoutY="101.0" prefHeight="25.0" prefWidth="313.0" promptText="Produto *" />
+                  <JFXTextField fx:id="txqtde" layoutX="61.0" layoutY="262.0" onKeyPressed="#CalcQtdeProd" prefHeight="22.0" prefWidth="218.0" promptText="Quantidade *" />
+                  <JFXTextField fx:id="txqtdefinal" disable="true" editable="false" labelFloat="true" layoutX="310.0" layoutY="262.0" prefHeight="22.0" prefWidth="218.0" promptText="Quantidade  Final*" />
+                  <JFXTextField fx:id="txobser" layoutX="56.0" layoutY="328.0" prefHeight="95.0" prefWidth="470.0" promptText="Observações" />
+                  <Label fx:id="lbqtde" layoutX="61.0" layoutY="243.0" prefHeight="17.0" prefWidth="218.0" textFill="#f10404" />
+                  <Label layoutX="61.0" layoutY="14.0" prefHeight="17.0" prefWidth="148.0" text="Emissão" />
+                  <Label fx:id="lberremissao" layoutX="61.0" layoutY="55.0" prefHeight="17.0" prefWidth="218.0" textFill="#d30f0f" />
+                  <Label fx:id="lberroqtde" layoutX="61.0" layoutY="298.0" prefHeight="17.0" prefWidth="313.0" textFill="#a40b0b" />
+               </children>
+            </Pane>
+            <Pane fx:id="pnbotoes" prefHeight="89.0" prefWidth="875.0" style="-fx-border-width: 1px 0px 0px 0px; -fx-border-color: #cccccc;">
+               <children>
+                  <JFXButton fx:id="btncancelar" layoutX="32.0" layoutY="28.0" onAction="#evtCancelar" prefHeight="33.0" prefWidth="195.0" ripplerFill="#bc2b2b" style="-fx-background-color: #cc6666;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <FontAwesomeIcon fill="WHITE" iconName="TIMES" layoutX="54.0" layoutY="50.0" size="1.5em" />
+                  <JFXButton fx:id="btnfinalizar" layoutX="348.0" layoutY="28.0" onAction="#evtFinalizar" prefHeight="28.0" prefWidth="195.0" ripplerFill="#227575" style="-fx-background-color: #339999;" text="Finalizar Acerto" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="DOWNLOAD" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

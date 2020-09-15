@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="358.0" prefWidth="402.0" style="-fx-background-color: #ffffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estagiocarvaobarao.utils.TelaBaixarController">
+   <children>
+      <VBox prefHeight="346.0" prefWidth="401.0">
+         <children>
+            <Pane prefHeight="368.0" prefWidth="600.0" style="-fx-border-image-width: 0px 0px 1px 0px; -fx-border-color: #cccccc;">
+               <children>
+                  <Label layoutX="76.0" layoutY="41.0" prefHeight="33.0" prefWidth="212.0" text="Data de pagamento *" textFill="#999999">
+                     <font>
+                        <Font name="Consolas" size="20.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dppago" layoutX="76.0" layoutY="74.0" prefHeight="33.0" prefWidth="270.0" />
+                  <JFXTextField fx:id="txvalor" labelFloat="true" layoutX="76.0" layoutY="153.0" prefHeight="33.0" prefWidth="270.0" promptText="Valor" />
+                  <Label fx:id="lbvalor" ellipsisString="" layoutX="76.0" layoutY="200.0" prefHeight="14.0" prefWidth="270.0" textFill="#f10404" visible="false">
+                     <font>
+                        <Font name="Consolas" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbdata" ellipsisString="" layoutX="76.0" layoutY="122.0" prefHeight="14.0" prefWidth="270.0" textFill="#f10404" visible="false">
+                     <font>
+                        <Font name="Consolas" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+               <children>
+                  <JFXButton fx:id="btnOk" layoutX="102.0" layoutY="18.0" onAction="#evtBtnOk" prefHeight="54.0" prefWidth="198.0" ripplerFill="#227575" style="-fx-background-color: #339999;" text="Baixar" textFill="WHITE">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="CHECK" size="1.5em" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,17 +23,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import estagiocarvaobarao.EstagioCarvaoBarao;
-import estagiocarvaobarao.dal.DALCidade;
+import estagiocarvaobarao.controller.ControllerNivelFuncionario;
 import estagiocarvaobarao.dal.DALConsulta;
-import estagiocarvaobarao.dal.DALFornecedor;
-import estagiocarvaobarao.dal.DALFuncionario;
+
 import estagiocarvaobarao.dal.DALNivelFuncionario;
-import estagiocarvaobarao.entidade.Cidade;
-import estagiocarvaobarao.entidade.Funcionario;
+
 import estagiocarvaobarao.entidade.NivelFuncionario;
 import static estagiocarvaobarao.ui.TelaFornecedorCadController.cid;
-import estagiocarvaobarao.utils.MaskFieldUtil;
-import estagiocarvaobarao.utils.Messages;
+
+import estagiocarvaobarao.utils.Mensagens;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -90,14 +89,10 @@ public class TelaNivelFuncionarioCadController implements Initializable {
 
     private JFXComboBox<NivelFuncionario> cbnivel;
 
-    @FXML
-    private JFXRadioButton rbcodigo;
-    @FXML
-    private ToggleGroup Pesquisa;
-    @FXML
-    private JFXRadioButton rbdescricao;
+    
     @FXML
     private TableColumn<NivelFuncionario, String> coldesc;
+    ControllerNivelFuncionario nfc = new ControllerNivelFuncionario();
 
     /**
      * Initializes the controller class.
@@ -109,78 +104,79 @@ public class TelaNivelFuncionarioCadController implements Initializable {
         colcod.setCellValueFactory(new PropertyValueFactory("codigo"));
         coldesc.setCellValueFactory(new PropertyValueFactory("descricao"));
 
-        estadoInicial();
+        nfc.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela);
     }
 
     private void estadoInicial() {
-        pnpesquisa.setDisable(false);
-        pndados.setDisable(true);
-        btconfirmar.setDisable(true);
-        btcancelar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        btnovo.setDisable(false);
-        ObservableList<Node> componentes = pndados.getChildren();//”limpa” os componentes
-        for (Node n : componentes) {
-            if (n instanceof TextInputControl)//textfield, textarea e htmleditor
-            {
-                ((TextInputControl) n).setText("");
-            }
-            if (n instanceof ComboBox) {
-                ((ComboBox) n).getSelectionModel().select(0);
-            }
-        }
-
-        carregaTabela("");
+        nfc.estadoInicial(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela);
     }
 
-    private int carregaTabela(String filtro) {
-        DALNivelFuncionario dal = new DALNivelFuncionario();
-        List<NivelFuncionario> res = dal.get(filtro);
-        ObservableList<NivelFuncionario> modelo;
-        modelo = FXCollections.observableArrayList(res);
-        tabela.setItems(modelo);
-        return res.size();
+    private void carregaTabela(String filtro) {
+        nfc.carregaTabela(tabela, filtro);
     }
 
     private void estadoEdicao() {
+        nfc.estadoEdicao(pndados,
+                pnpesquisa,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela,txpesquisar);
 
-        pnpesquisa.setDisable(true);
-        pndados.setDisable(false);
-        btconfirmar.setDisable(false);
-        btapagar.setDisable(true);
-        btalterar.setDisable(true);
-        txnome.requestFocus();
     }
 
     @FXML
     private void clknovo(ActionEvent event) {
-        estadoEdicao();
+        nfc.estadoEdicao(pndados,
+                pnpesquisa,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela,txpesquisar);
     }
 
     @FXML
     private void clkalterar(ActionEvent event) {
-        estadoEdicao();
-        DALNivelFuncionario dal = new DALNivelFuncionario();
-        DALCidade dalc = new DALCidade();
-        NivelFuncionario nf = (NivelFuncionario) tabela.getSelectionModel().getSelectedItem();
-        Cidade cidade = null;
-        txcod.setText("" + nf.getCodigo());
-        txnome.setText("" + nf.getDescricao());
+        nfc.estadoEdicao(pndados,
+                pnpesquisa,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela,txpesquisar);
+        nfc.alterar(tabela,txcod,txnome);
+        
 
     }
 
     @FXML
     private void clkapagar(ActionEvent event) {
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setContentText("Confirma a exclusão");
-        if (a.showAndWait().get() == ButtonType.OK) {
-            DALNivelFuncionario dal = new DALNivelFuncionario();
-            NivelFuncionario nf;
-            nf = tabela.getSelectionModel().getSelectedItem();
-            dal.apagar(nf.getCodigo());
-            carregaTabela("");
-        }
+        nfc.apagar(tabela);
+        
     }
 
     private boolean CampoVazio(String valor) {
@@ -196,80 +192,69 @@ public class TelaNivelFuncionarioCadController implements Initializable {
         return res;
     }
 
+    public void validar(JFXTextField campo, String texto) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        campo.resetValidation();
+        campo.getValidators().add(validator);
+        validator.setMessage(texto);
+        campo.validate();
+    }
+
     @FXML
     private void clkconfirmar(ActionEvent event) {
 
         int cod, erro = 0;
-        NivelFuncionario nf;
-        DALNivelFuncionario dal = new DALNivelFuncionario();
+        
 
-        Messages msg = new Messages();
+        Mensagens msg = new Mensagens();
         try {
             cod = Integer.parseInt(txcod.getText());
         } catch (Exception e) {
             cod = 0;
         }
-
+        if (txnome.getText().isEmpty()) {
+            validar(txnome, "Campo não pode estra vazio!");
+            erro = 1;
+        }
         if (erro == 0) {
-
-            nf = new NivelFuncionario(cod, txnome.getText());
-
-            if (nf.getCodigo() == 0) {
-                if (dal.salvar(nf)) {
-                    msg.Confirmation("Gravação concluida", "Gravado com Sucesso");
-                } else {
-                    msg.Error("Erro ao gravar!", "Problemas ao Gravar");
-                }
-            } else if (dal.alterar(nf)) {
-                msg.Confirmation("Gravação concluida", "Alterado com Sucesso");
-            } else {
-                msg.Error("Erro ao alterar!", "Problemas ao Alterar");
-            }
-            estadoInicial();
+            nfc.confirmar(cod, txnome.getText(),pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela);
+            
         }
     }
 
     @FXML
     private void clkcancelar(ActionEvent event) {
-        if (!pndados.isDisabled())//encontra em estado de edição
-        {
-            estadoInicial();
-        } else {
-            btnovo.getScene().getWindow().hide();//fecha a janela
-        }
+        nfc.cancelar(pnpesquisa,
+                pndados,
+                btconfirmar,
+                btcancelar,
+                btapagar,
+                btalterar,
+                btnovo,
+                txnome,
+                tabela);
+        
     }
 
     @FXML
     private void clkPesquisar(ActionEvent event) {
-        if (!txpesquisar.getText().isEmpty()) {
-            if (rbdescricao.isSelected()) {
-                carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-            } else {
-                if (rbcodigo.isSelected()) {
-                    carregaTabela("codigo=" + txpesquisar.getText().toUpperCase());
-                }
-            }
-        } else {
-            carregaTabela("upper(descricao) like '%" + txpesquisar.getText().toUpperCase() + "%'");
-        }
+        nfc.Pesquisar(txpesquisar,tabela);
+       
     }
 
     @FXML
     private void evtTabela(MouseEvent event) {
-        if (tabela.getSelectionModel().getSelectedIndex() >= 0) {
-            btalterar.setDisable(false);
-            btapagar.setDisable(false);
-        }
+         nfc.evtTabela(tabela,btalterar,btapagar);
+        
     }
 
-    @FXML
-    private void evRbCodigo(ActionEvent event) {
-    }
-
-    @FXML
-    private void evRbDescricao(ActionEvent event) {
-    }
-
-   
 
 }
